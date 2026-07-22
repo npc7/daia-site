@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAIA — On-chain Intelligence &amp; Risk Engine</title>
+  <meta name="description" content="DAIA is an on-chain intelligence and risk engine: real-time address & transaction screening, sanctions data and fund tracing across 11 chains. Free for enterprise partners.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0f1e'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%2322d3ee' font-family='Arial' font-weight='bold'>D</text></svg>">
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">DAIA<span class="brand-dot">.</span></a>
+    <nav class="nav-links">
+      <a href="#products" data-i18n="nav.products">Products</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#free" data-i18n="nav.free">Free Access</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="lang-en" class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button id="lang-zh" class="lang-btn" onclick="setLang('zh')">中</button>
+      </div>
+      <a class="btn btn-small" href="https://width.info" target="_blank" rel="noopener" data-i18n="nav.cta">Get Access</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="container hero-inner">
+      <p class="hero-kicker" data-i18n="hero.kicker">ON-CHAIN INTELLIGENCE &amp; RISK ENGINE</p>
+      <h1 class="hero-title" data-i18n="hero.title">Know where the money comes from.<br>Keep bad funds out.</h1>
+      <p class="hero-sub" data-i18n="hero.sub">DAIA is an on-chain intelligence and risk engine — real-time address &amp; transaction screening, self-built sanctions data and multi-hop fund tracing across 11 chains. Free for enterprise partners.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://width.info" target="_blank" rel="noopener" data-i18n="hero.cta">Apply for Free Enterprise Access →</a>
+        <a class="btn btn-ghost" href="#products" data-i18n="hero.cta2">Explore the engine</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="container stats-grid">
+      <div class="stat">
+        <div class="stat-num">11</div>
+        <div class="stat-label" data-i18n="stats.chains">chains, near real-time data</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-i18n="stats.millionsNum">Millions</div>
+        <div class="stat-label" data-i18n="stats.labels">of labeled addresses</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">&lt;1s</div>
+        <div class="stat-label" data-i18n="stats.sanctions">sanctions data search</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5-hop</div>
+        <div class="stat-label" data-i18n="stats.tracing">fund tracing depth</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCTS ============ -->
+  <section class="section" id="products">
+    <div class="container">
+      <h2 class="section-title" data-i18n="products.title">One engine, four capabilities</h2>
+      <p class="section-sub" data-i18n="products.sub">Everything a compliance team needs to screen crypto flows — built on our own data, our own labels, our own rules.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">◈</div>
+          <h3 data-i18n="products.kya.title">KYA · Address Screening</h3>
+          <p data-i18n="products.kya.body">Screen any address for direct hits and indirect exposure across 0–5 hops — sanctions, terrorism financing, mixers, hacks, darknet and more. Materiality thresholds are fully configurable.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⇄</div>
+          <h3 data-i18n="products.kyt.title">KYT · Transaction Screening</h3>
+          <p data-i18n="products.kyt.body">Direction-aware screening for deposits and withdrawals. Trace the funds behind each transfer back to their source, and block or escalate in real time.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⛨</div>
+          <h3 data-i18n="products.sanctions.title">Sanctions Screening</h3>
+          <p data-i18n="products.sanctions.body">Self-built sanctions database covering OFAC, UN, EU, UK and more — entities, individuals, companies and addresses, searchable in under a second.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">◎</div>
+          <h3 data-i18n="products.labels.title">Intelligence &amp; Labels</h3>
+          <p data-i18n="products.labels.body">Continuously updated labels for exchanges, DeFi protocols, mixers, hacks and darknet entities — verified by a dedicated intelligence team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section section-alt" id="how">
+    <div class="container">
+      <h2 class="section-title" data-i18n="how.title">How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3 data-i18n="how.s1.title">Integrate the API</h3>
+          <p data-i18n="how.s1.body">One REST API. Three built-in rulesets — KYA, KYT-IN, KYT-OUT — or bring your own thresholds and rules.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3 data-i18n="how.s2.title">Screen in real time</h3>
+          <p data-i18n="how.s2.body">Every address and transfer is checked against sanctions, crime and obfuscation risk — with per-hop materiality controls that keep false positives down.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3 data-i18n="how.s3.title">Explainable results</h3>
+          <p data-i18n="how.s3.body">Every hit returns the exact rules triggered — a ready-made audit trail for compliance teams and regulators, supporting MAS PSN02 and FATF Travel Rule scenarios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FREE ACCESS ============ -->
+  <section class="section" id="free">
+    <div class="container free-box">
+      <h2 class="free-title" data-i18n="free.title">Free for enterprise partners</h2>
+      <p class="free-body" data-i18n="free.body">We provide wallets, custodians, payment companies and trading platforms with free, SLA-backed access to the full DAIA engine — on-chain intelligence, screening and sanctions data included.</p>
+      <a class="btn btn-primary btn-lg" href="https://width.info" target="_blank" rel="noopener" data-i18n="free.cta">Talk to us at width.info →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© 2026 DAIA</span>
+    <span class="footer-sep">·</span>
+    <a href="https://width.info" target="_blank" rel="noopener" data-i18n="footer.by">by Width</a>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+</body>
+</html>
