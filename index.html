@@ -16,6 +16,7 @@
     <nav class="nav-links">
       <a href="#products" data-i18n="nav.products">Products</a>
       <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#amlclaw" data-i18n="nav.amlclaw">AMLClaw</a>
       <a href="#free" data-i18n="nav.free">Free Access</a>
     </nav>
     <div class="nav-right">
@@ -120,8 +121,67 @@
     </div>
   </section>
 
+  <!-- ============ AMLCLAW ============ -->
+  <section class="section" id="amlclaw">
+    <div class="container">
+      <p class="amlclaw-kicker" data-i18n="amlclaw.kicker">OPEN SOURCE · MIT · SELF-HOSTED</p>
+      <h2 class="section-title" data-i18n="amlclaw.title">AMLClaw — the open-source app built on DAIA</h2>
+      <p class="section-sub" data-i18n="amlclaw.sub">A compliance desk open-sourced by the DAIA team. It wraps our KYA / KYT API into ready-to-run payment workflows — screening, monitoring and evidence reports — and shows you how to call the API the right way.</p>
+
+      <div class="cards" style="margin-top:44px">
+        <div class="card">
+          <div class="card-icon">◈</div>
+          <h3 data-i18n="amlclaw.f1.title">KYA / KYT screening</h3>
+          <p data-i18n="amlclaw.f1.body">Screen an address or a transaction hash in one click — direction-aware, with full path evidence and an interactive fund-flow graph.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">◎</div>
+          <h3 data-i18n="amlclaw.f2.title">Address monitoring</h3>
+          <p data-i18n="amlclaw.f2.body">Watch an address's future transfers and auto-KYT every new one — receiving = in, sending = out. Every tx lands in a filterable ledger, nothing missed.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⛨</div>
+          <h3 data-i18n="amlclaw.f3.title">TX monitoring</h3>
+          <p data-i18n="amlclaw.f3.body">Keep watching a counterparty — a tx's from / to address — and alert the moment it gets tagged Sanctions or Freeze, or its risk level escalates.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⌘</div>
+          <h3 data-i18n="amlclaw.f4.title">Self-hosted & free</h3>
+          <p data-i18n="amlclaw.f4.body">MIT-licensed, no database, your data never leaves your server. Bring one width.info API key and deploy anywhere.</p>
+        </div>
+      </div>
+
+      <div class="practice">
+        <h3 class="practice-title" data-i18n="amlclaw.bp.title">How to use the API well — lessons baked into AMLClaw</h3>
+        <div class="practice-list">
+          <div class="practice-item">
+            <span class="practice-tag">hops = 1</span>
+            <p data-i18n="amlclaw.bp1.body">For continuous TX monitoring, set hops = 1. You only need to know whether the counterparty (from / to) address itself carries a high-risk label — Sanctions, Freeze and the like. One hop skips the deep graph walk, so each cycle returns in a fraction of the time — exactly what high-frequency monitoring needs.</p>
+          </div>
+          <div class="practice-item">
+            <span class="practice-tag" data-i18n="amlclaw.bp2.tag">custom ruleset</span>
+            <p data-i18n="amlclaw.bp2.body">Don't leave ruleset_id at the broad default. Point each monitor at your own ruleset — pick the categories and thresholds that match your business — and alerts get far more precise, with fewer false positives.</p>
+          </div>
+          <div class="practice-item">
+            <span class="practice-tag" data-i18n="amlclaw.bp3.tag">deep KYA on demand</span>
+            <p data-i18n="amlclaw.bp3.body">Reserve multi-hop (3–5) for one-off deposit / withdrawal screening, where you genuinely need to trace source of funds. Keep deep hops out of the monitoring loop — depth there just costs latency.</p>
+          </div>
+          <div class="practice-item">
+            <span class="practice-tag" data-i18n="amlclaw.bp4.tag">rolling window · serial</span>
+            <p data-i18n="amlclaw.bp4.body">Each cycle screens only [last run → now], never from zero — faster, no re-scanning. Run jobs one after another to respect API concurrency limits, and log every tx so you can prove full coverage.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="amlclaw-actions">
+        <a class="btn btn-primary" href="https://github.com/amlclaw/amlclaw.com" target="_blank" rel="noopener" data-i18n="amlclaw.cta">View AMLClaw on GitHub →</a>
+        <a class="btn btn-ghost" href="https://width.info/api-reference" target="_blank" rel="noopener" data-i18n="amlclaw.cta2">Read the API reference</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ FREE ACCESS ============ -->
-  <section class="section" id="free">
+  <section class="section section-alt" id="free">
     <div class="container free-box">
       <h2 class="free-title" data-i18n="free.title">Free for enterprise partners</h2>
       <p class="free-body" data-i18n="free.body">We provide wallets, custodians, payment companies and trading platforms with free, SLA-backed access to the full DAIA engine — on-chain intelligence, screening and sanctions data included.</p>

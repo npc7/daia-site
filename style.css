@@ -135,6 +135,27 @@ a { color: var(--accent); text-decoration: none; }
 .step h3 { font-size: 18px; margin-bottom: 10px; }
 .step p { color: var(--muted); font-size: 14.5px; }
 
+/* ============ AMLClaw ============ */
+.amlclaw-kicker {
+  text-align: center; color: var(--accent); font-size: 12px; font-weight: 700;
+  letter-spacing: 3px; margin-bottom: 14px;
+}
+.practice {
+  margin-top: 44px; background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 38px 34px;
+}
+.practice-title { font-size: 20px; font-weight: 800; text-align: center; margin-bottom: 26px; }
+.practice-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 32px; }
+.practice-item { display: flex; flex-direction: column; gap: 9px; }
+.practice-tag {
+  align-self: flex-start;
+  font-family: ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace;
+  font-size: 12px; font-weight: 700; color: #06202a; background: var(--accent);
+  padding: 3px 11px; border-radius: 6px; letter-spacing: .3px;
+}
+.practice-item p { color: var(--muted); font-size: 14.5px; }
+.amlclaw-actions { margin-top: 36px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
 /* ============ Free access ============ */
 .free-box {
   text-align: center;
@@ -163,4 +184,5 @@ a { color: var(--accent); text-decoration: none; }
   .stat:nth-child(3) { border-left: 0; }
   .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--border); }
   .nav-links { display: none; }
+  .practice-list { grid-template-columns: 1fr; }
 }
