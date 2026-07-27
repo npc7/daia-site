@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMLClaw 销售培训手册 · Sales Enablement</title>
-<meta name="description" content="AMLClaw 销售培训手册：定位、客户痛点、四大功能讲解、核心卖点、目标客户、现场 Demo 脚本、异议处理与话术、术语速查。">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0f1e'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%2322d3ee' font-family='Arial' font-weight='bold'>A</text></svg>">
+<title>Width DAIA 销售培训手册 · Sales Enablement</title>
+<meta name="description" content="Width DAIA 销售培训手册：链上情报与风控引擎的定位、四大能力、工作方式、AMLClaw 参考应用、核心卖点、目标客户、现场 Demo 脚本、异议处理与话术、术语速查。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0f1e'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%2322d3ee' font-family='Arial' font-weight='bold'>D</text></svg>">
 <style>
 :root{
   --bg:#0a0f1e; --bg-alt:#0d1526; --panel:#111a30; --panel-2:#0e1729;
@@ -63,7 +63,11 @@ ul{margin:6px 0 12px 4px;list-style:none}
 li{color:var(--muted);font-size:14.8px;padding-left:20px;position:relative;margin-bottom:7px}
 li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-size:12px;top:2px}
 
-.divider{height:1px;background:var(--border);margin-top:52px}
+/* stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.stat{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 14px;text-align:center}
+.stat .n{font-size:26px;font-weight:800;color:var(--accent);letter-spacing:-.5px}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:4px}
 
 /* pitch box */
 .pitch{
@@ -139,6 +143,7 @@ code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);pad
   .side{display:none}
   .main{padding:30px 22px 70px}
   .grid2,.grid3{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
   h1{font-size:30px}
 }
 @media print{
@@ -154,19 +159,21 @@ code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);pad
 
   <!-- ============ SIDEBAR ============ -->
   <aside class="side">
-    <div class="brand">AML<span>Claw</span></div>
+    <div class="brand">DAIA<span>.</span></div>
     <div class="brand-sub">Sales Enablement</div>
     <nav class="toc" id="toc">
       <a href="#pitch"><span class="num">00</span>30秒电梯陈述</a>
-      <a href="#what"><span class="num">01</span>这是什么</a>
+      <a href="#what"><span class="num">01</span>DAIA 是什么</a>
       <a href="#why"><span class="num">02</span>客户为什么需要</a>
-      <a href="#features"><span class="num">03</span>四大功能</a>
-      <a href="#edge"><span class="num">04</span>核心卖点</a>
-      <a href="#who"><span class="num">05</span>目标客户</a>
-      <a href="#demo"><span class="num">06</span>现场 Demo 脚本</a>
-      <a href="#faq"><span class="num">07</span>异议处理 FAQ</a>
-      <a href="#glossary"><span class="num">08</span>术语速查</a>
-      <a href="#cheat"><span class="num">09</span>一页速记</a>
+      <a href="#caps"><span class="num">03</span>四大能力</a>
+      <a href="#how"><span class="num">04</span>它如何工作</a>
+      <a href="#amlclaw"><span class="num">05</span>AMLClaw 参考应用</a>
+      <a href="#edge"><span class="num">06</span>核心卖点</a>
+      <a href="#who"><span class="num">07</span>目标客户</a>
+      <a href="#demo"><span class="num">08</span>现场 Demo 脚本</a>
+      <a href="#faq"><span class="num">09</span>异议处理 FAQ</a>
+      <a href="#glossary"><span class="num">10</span>术语速查</a>
+      <a href="#cheat"><span class="num">11</span>一页速记</a>
     </nav>
     <button class="print-btn" onclick="window.print()">🖨 打印 / 存为 PDF</button>
   </aside>
@@ -176,12 +183,18 @@ code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);pad
 
     <header>
       <p class="kicker">内部销售培训 · 市场团队专用</p>
-      <h1>AMLClaw 销售培训手册</h1>
-      <p class="lede">一份给市场 / 销售同学的实战讲解材料：怎么用一句话讲清产品、客户为什么买单、四大功能怎么演示、遇到刁钻问题怎么接。看完这一页，你就能独立给客户开场。</p>
+      <h1>Width DAIA 销售培训手册</h1>
+      <p class="lede">一份给市场 / 销售同学的实战讲解材料：怎么用一句话讲清 DAIA、客户为什么买单、四大能力怎么演示、遇到刁钻问题怎么接。看完这一页，你就能独立给客户开场。</p>
       <div class="meta-row">
-        <span class="chip"><b>产品</b> AMLClaw · 加密合规工作台</span>
-        <span class="chip"><b>底层</b> Width DAIA · KYA/KYT API</span>
-        <span class="chip"><b>形态</b> 开源 · MIT · 可私有部署</span>
+        <span class="chip"><b>产品</b> Width DAIA · 链上情报与风控引擎</span>
+        <span class="chip"><b>交付</b> KYA / KYT REST API</span>
+        <span class="chip"><b>样板</b> AMLClaw 开源参考应用</span>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">11</div><div class="l">条链 · 近实时数据</div></div>
+        <div class="stat"><div class="n">百万级</div><div class="l">标签地址库</div></div>
+        <div class="stat"><div class="n">&lt;1s</div><div class="l">制裁数据检索</div></div>
+        <div class="stat"><div class="n">5-hop</div><div class="l">最深资金追溯</div></div>
       </div>
     </header>
 
@@ -191,33 +204,33 @@ code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);pad
       <p class="sec-sub">见客户第一句话就用它。记住三个词：<strong>看清来源 · 持续盯防 · 留下证据</strong>。</p>
       <div class="pitch">
         <div class="q">背下来 → 张口就来</div>
-        <p>「AMLClaw 是 Width DAIA 团队开源的一套<strong>加密反洗钱合规工作台</strong>。客户只要<strong>一把 API Key</strong>，就能对任意<strong>地址</strong>、任意<strong>交易</strong>做制裁与风险筛查；还能 7×24 <strong>持续监控</strong>一个地址后续的每一笔资金往来——一旦碰上制裁、混币、黑客这些脏钱，<strong>立刻告警</strong>，并留下完整的链上<strong>路径证据</strong>。它<strong>自托管、开源免费、数据不出客户服务器</strong>，就是钱包、支付、交易所做合规的一道『链上安检门』。」</p>
+        <p>「Width DAIA 是我们自研的<strong>链上情报与风控引擎</strong>——覆盖 <strong>11 条链</strong>、<strong>自建制裁数据库</strong>、百万级标签地址。客户只要接一套 <strong>API</strong>，就能对任意地址、任意交易做制裁与风险筛查，最深 <strong>5 跳</strong>追溯资金来源，每次命中都给出<strong>可解释的规则证据</strong>。我们对钱包、支付、交易所等大客户<strong>免费开放（含 SLA）</strong>。为了让客户看得见怎么用，我们还开源了参考应用 <strong>AMLClaw</strong>——把引擎封装成开箱即用的筛查与持续监控工作台。」</p>
       </div>
-      <div class="note tip"><p><b>一句话版本：</b>给加密业务装一道链上安检门——脏钱进不来，每一笔都留痕。</p></div>
+      <div class="note tip"><p><b>一句话版本：</b>一套链上情报与风控引擎，把脏钱挡在门外，每一笔都可解释、可追溯。</p></div>
     </section>
 
     <!-- 01 WHAT -->
     <section id="what">
-      <h2><span class="h-num">01</span>这是什么 · 和 Width / DAIA 什么关系</h2>
-      <p class="sec-sub">先把「引擎」和「应用」这层关系讲清楚，客户最容易在这里绕晕。</p>
+      <h2><span class="h-num">01</span>DAIA 是什么 · 三层要讲清</h2>
+      <p class="sec-sub">客户最容易在「引擎 / API / 应用」这层绕晕，先把关系摆明白。</p>
       <div class="grid3">
-        <div class="card">
-          <div class="role">底层引擎</div>
-          <h3>Width · DAIA</h3>
-          <p>链上情报与风控引擎：覆盖 11 条链的地址/交易筛查、自建制裁数据库、百万级标签地址、最深 5 跳资金追溯。这是「数据和能力」的来源。</p>
-        </div>
-        <div class="card">
-          <div class="role">对外 API</div>
-          <h3>KYA / KYT API（V3）</h3>
-          <p>把引擎能力开放成一套 REST API：<code>KYA</code> 查地址、<code>KYT</code> 查交易。客户拿一把 Key 就能调。</p>
-        </div>
         <div class="card feat">
-          <div class="role">上层应用（我们卖的）</div>
-          <h3>AMLClaw</h3>
-          <p>把 API 封装成开箱即用的业务界面——筛查、监控、台账、证据报告。客户不用自己写代码，装上就能用。</p>
+          <div class="role">核心产品（我们卖的）</div>
+          <h3>Width DAIA 引擎</h3>
+          <p>链上情报与风控引擎：自建制裁数据、百万级标签、11 链近实时、5 跳资金追溯。这是我们真正的<strong>数据与能力资产</strong>。</p>
+        </div>
+        <div class="card">
+          <div class="role">交付方式</div>
+          <h3>KYA / KYT API</h3>
+          <p>把引擎能力开放成一套 REST API：<code>KYA</code> 查地址、<code>KYT</code> 查交易。客户拿一把 Key 就能接。在 <a href="https://width.info" target="_blank" rel="noopener">width.info</a> 申请。</p>
+        </div>
+        <div class="card">
+          <div class="role">开源样板 / 演示</div>
+          <h3>AMLClaw 应用</h3>
+          <p>DAIA 团队开源的参考应用，把 API 封装成开箱即用的界面。客户拿它<strong>看效果、做 POC、直接部署</strong>都行。</p>
         </div>
       </div>
-      <div class="note key"><p><b>类比帮客户理解：</b>DAIA 是「发动机」，KYA/KYT API 是「油管接口」，<b>AMLClaw 就是整台可以直接开走的车</b>。客户既可以只接 API 自己造车，也可以直接用我们这台开源的车。</p></div>
+      <div class="note key"><p><b>类比帮客户理解：</b>DAIA 是「发动机」，KYA/KYT API 是「油管接口」，<b>AMLClaw 是我们开源的一台样车</b>——客户既能只接 API 自己造车，也能直接开走这台样车。<b>我们卖的是发动机（引擎能力），AMLClaw 是让客户一眼看懂的展车。</b></p></div>
     </section>
 
     <!-- 02 WHY -->
@@ -230,70 +243,107 @@ code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);pad
         <li><strong>脏钱风险</strong>：一旦收了制裁地址、混币器、黑客赃款的钱，账户可能被冻结、被追责，声誉和资金双输。</li>
         <li><strong>说不清</strong>：出事时监管问「你当时怎么判断这笔干净？」，客户拿不出证据链，等于裸奔。</li>
       </ul>
-      <h3>AMLClaw 怎么对症</h3>
+      <h3>DAIA 怎么对症</h3>
       <ul>
         <li>痛点一 → <strong>事前筛查</strong>：入金/出金前先查地址和交易，脏钱挡在门外。</li>
-        <li>痛点二 → <strong>事中监控</strong>：地址收钱后持续盯，脏钱流入立刻告警，不是查一次就完。</li>
-        <li>痛点三 → <strong>可解释证据</strong>：每次命中都返回触发的<strong>具体规则 + 资金路径图</strong>，即拿即用的审计依据。</li>
+        <li>痛点二 → <strong>持续监控</strong>：地址收钱后持续盯，脏钱流入立刻告警，不是查一次就完（AMLClaw 的两个监控模块）。</li>
+        <li>痛点三 → <strong>可解释证据</strong>：每次命中都返回触发的<strong>具体规则 + 资金路径</strong>，即拿即用的审计依据，支撑 MAS PSN02、FATF Travel Rule。</li>
       </ul>
     </section>
 
-    <!-- 03 FEATURES -->
-    <section id="features">
-      <h2><span class="h-num">03</span>四大功能 · 怎么讲怎么演</h2>
-      <p class="sec-sub">每个功能记住：<strong>一句话定位 → 解决什么 → 演示看点</strong>。</p>
+    <!-- 03 CAPABILITIES -->
+    <section id="caps">
+      <h2><span class="h-num">03</span>DAIA 四大能力</h2>
+      <p class="sec-sub">引擎对外的四块核心能力——基于我们自己的数据、标签、规则。</p>
       <div class="grid2">
         <div class="card feat">
           <span class="tag">KYA</span>
           <h3>地址筛查</h3>
-          <p><strong>定位：</strong>查「这个地址干不干净」。粘一个 ETH 或 Tron 地址（自动识别链），做 0–5 跳的自身命中 + 间接敞口筛查——制裁、恐怖融资、混币器、黑客、暗网等。</p>
-          <p><strong>解决：</strong>开户、上币、大额入金前的尽调（KYC/CDD）。</p>
-          <div class="demo"><b>演示看点：</b>风险等级（低/中/高/严重）+ 命中的具体规则 + 可交互的资金流向图。</div>
+          <p>对任意地址做 <strong>0–5 跳</strong>的自身命中与间接敞口筛查——制裁、恐怖融资、混币器、黑客、暗网等。重要性阈值可调，把误报压低。</p>
         </div>
         <div class="card feat">
           <span class="tag">KYT</span>
           <h3>交易筛查</h3>
-          <p><strong>定位：</strong>查「这一笔交易的钱脏不脏」。粘一笔交易哈希，选方向——<code>in</code> 查资金来源、<code>out</code> 查去向、或两者都查，入金出金用<strong>不同的规则</strong>。</p>
-          <p><strong>解决：</strong>每一笔充值/提现的实时放行判断。</p>
-          <div class="demo"><b>演示看点：</b>与 Chainalysis 对齐的处置建议（拦截/复核/告警/监控）+ 逐笔路径证据。</div>
+          <p>区分<strong>入金 / 出金方向</strong>的实时交易筛查，按「本笔资金」向上溯源，实时拦截或升级处置。</p>
         </div>
         <div class="card feat">
-          <span class="tag">地址监控</span>
-          <h3>盯住一个地址的未来交易</h3>
-          <p><strong>定位：</strong>添加一个地址，自动盯它<strong>后续每一笔</strong>稳定币转账（ETH: USDT+USDC，Tron: USDT），按计划（每小时~每天）对每笔新交易自动 KYT——收款算 in、付款算 out。</p>
-          <p><strong>解决：</strong>「查一次干净不代表永远干净」，持续风控。</p>
-          <div class="demo"><b>演示看点：</b>全量交易入台账（像区块浏览器），可只看有问题的，还能出「某时段共 X 笔、其中 Y 笔严重」的统计——<b>证明我们把每一笔都检测了</b>。</div>
+          <span class="tag">Sanctions</span>
+          <h3>制裁筛查</h3>
+          <p><strong>自建</strong>制裁数据库，覆盖 OFAC、UN、EU、UK 等名单——主体、个人、企业、地址，<strong>秒级</strong>检索。</p>
         </div>
         <div class="card feat">
-          <span class="tag">TX 监控</span>
-          <h3>盯住一个对手方</h3>
-          <p><strong>定位：</strong>从任意 KYT 结果里，把这笔交易的 <code>from</code> 或 <code>to</code> 地址加入监控，周期性 KYA 复筛它<strong>本身的标签变化</strong>。</p>
-          <p><strong>解决：</strong>今天干净的对手方，明天可能被打上制裁/冻结标签——第一时间知道。</p>
-          <div class="demo"><b>演示看点：</b>一旦对手方涉及 <b>Sanctions（制裁）/ Freeze（冻结）</b> 或风险等级升级，立即告警。</div>
+          <span class="tag">Intelligence</span>
+          <h3>链上情报标签库</h3>
+          <p>持续更新的交易所、DeFi 协议、混币器、黑客与暗网实体标签，由<strong>专职情报团队</strong>校验。</p>
         </div>
       </div>
-      <div class="note tip"><p><b>讲功能的节奏：</b>KYA/KYT 是「进门安检」（事前一次性查），两个监控是「巡逻队」（事中持续查）。客户几乎都会问「查完之后怎么办」——答案就是两个监控。</p></div>
     </section>
 
-    <!-- 04 EDGE -->
+    <!-- 04 HOW -->
+    <section id="how">
+      <h2><span class="h-num">04</span>它如何工作 · 三步</h2>
+      <p class="sec-sub">给客户讲清落地路径：接一套 API，实时筛，拿到可解释结果。</p>
+      <div class="steps">
+        <div class="stepc"><div class="n"></div><div>
+          <h3>接入 API</h3>
+          <p>一套 REST API，三套内置规则集（<code>KYA</code> / <code>KYT-IN</code> / <code>KYT-OUT</code>），也支持<strong>自定义阈值与规则</strong>。</p>
+        </div></div>
+        <div class="stepc"><div class="n"></div><div>
+          <h3>实时筛查</h3>
+          <p>每个地址、每笔转账实时比对制裁、犯罪与混淆风险——<strong>按跳数分级的重要性控制</strong>，把误报压到最低。</p>
+        </div></div>
+        <div class="stepc"><div class="n"></div><div>
+          <h3>可解释的结果</h3>
+          <p>每次命中返回触发的<strong>具体规则清单 + 资金路径</strong>——即拿即用的审计依据，支撑 MAS PSN02、FATF Travel Rule 等合规场景。</p>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- 05 AMLCLAW -->
+    <section id="amlclaw">
+      <h2><span class="h-num">05</span>AMLClaw 参考应用 · 也是「怎么用好 API」的样板</h2>
+      <p class="sec-sub">AMLClaw 是 DAIA 团队开源（MIT、可私有部署）的参考应用，把 KYA/KYT 封装成四个开箱即用的工作流。它最大的价值：<strong>把「API 怎么用对」直接做进了产品</strong>。</p>
+      <div class="grid2">
+        <div class="card">
+          <span class="tag">工作流</span>
+          <h3>KYA 地址筛查 + KYT 交易筛查</h3>
+          <p>一键查一个地址或一笔交易哈希（自动识别 ETH / Tron），区分方向，带完整路径证据和可交互资金流向图。</p>
+        </div>
+        <div class="card">
+          <span class="tag">工作流</span>
+          <h3>地址监控 + TX 监控</h3>
+          <p>地址监控盯一个地址后续每笔转账并自动 KYT；TX 监控盯某笔交易的对手方（from/to）标签变化，涉制裁/冻结立即告警。</p>
+        </div>
+      </div>
+
+      <div class="note key"><p><b>「用好 API」是我们的隐形卖点。</b>同一套 API，会用和不会用差一个量级。AMLClaw 把最佳实践沉淀了下来，这几条一定要讲给客户：</p></div>
+      <table class="tbl">
+        <tr><th>实践</th><th>怎么做 / 为什么</th></tr>
+        <tr><td>hops = 1</td><td>做<strong>持续监控</strong>时只用 1 跳——只看对手方（from/to）地址<strong>本身是否触发高风险标签</strong>（制裁/冻结）。一跳省去深度图遍历，<strong>快一个量级</strong>，正是高频监控需要的。</td></tr>
+        <tr><td>自定义 ruleset</td><td>别用 <code>ruleset_id</code> 的宽泛默认值。指向客户自己的规则集，挑贴业务的类别和阈值 → <strong>更精准、误报更少</strong>。</td></tr>
+        <tr><td>按需深筛</td><td>多跳（3–5）留给<strong>一次性</strong>的入/出金筛查——那种真要追溯资金来源的场景。别把深跳塞进监控循环，深度只换延迟。</td></tr>
+        <tr><td>滚动窗口 · 串行</td><td>每轮只筛 <strong>[上次运行→现在]</strong> 的增量，任务串行排队尊重 API 并发上限。速度快、调用省，每笔入台账证明全量覆盖。</td></tr>
+      </table>
+    </section>
+
+    <!-- 06 EDGE -->
     <section id="edge">
-      <h2><span class="h-num">04</span>核心卖点 · 我们凭什么赢</h2>
-      <p class="sec-sub">这些是打单时反复强调的差异化。</p>
+      <h2><span class="h-num">06</span>核心卖点 · 我们凭什么赢</h2>
+      <p class="sec-sub">打单时反复强调的差异化。</p>
       <div class="grid3">
-        <div class="card"><h3>🗄 服务端规则</h3><p>规则集在服务端维护，客户本地不用养规则库。用内置默认，也能<strong>自定义 ruleset</strong>，按业务挑类别和阈值。</p></div>
-        <div class="card"><h3>🔎 完整路径证据</h3><p>每次命中都给出触发的规则和资金流向图，天然是给监管看的审计链。</p></div>
-        <div class="card"><h3>⚡ 监控又快又省</h3><p>持续监控用 <code>hops=1</code>、滚动窗口只筛增量、串行调用——速度快、API 调用省。</p></div>
-        <div class="card"><h3>🔓 开源可私有部署</h3><p>MIT 开源、无数据库，<strong>数据不出客户服务器</strong>，一把 Key、Docker 一键起，随处部署。</p></div>
-        <div class="card"><h3>🌐 自建数据 · 11 链</h3><p>自建制裁数据库（OFAC/UN/EU/UK）、百万级标签、11 条链近实时，秒级检索。</p></div>
-        <div class="card"><h3>💸 大客户免费</h3><p>Width 对钱包/托管/支付/交易平台提供<strong>免费、含 SLA</strong> 的引擎接入——极强的价格杀伤力。</p></div>
+        <div class="card"><h3>🌐 自建数据 · 11 链</h3><p>自建制裁数据库（OFAC/UN/EU/UK）、百万级标签、11 条链近实时，秒级检索。数据是<strong>自己的</strong>，不是转售。</p></div>
+        <div class="card"><h3>🔎 完整路径证据</h3><p>每次命中都给出触发的规则和资金流向——天然是给监管看的审计链。</p></div>
+        <div class="card"><h3>🗄 规则可自定义</h3><p>服务端维护规则集，客户不用养规则库；也能自定义 ruleset，按业务挑类别和阈值。</p></div>
+        <div class="card"><h3>💸 大客户免费</h3><p>对钱包/托管/支付/交易平台提供<strong>免费、含 SLA</strong> 的引擎接入——极强的价格杀伤力。</p></div>
+        <div class="card"><h3>🔓 开源样板可自托管</h3><p>AMLClaw 开源（MIT）、无数据库，<strong>数据不出客户服务器</strong>，Docker 一键起，POC 零门槛。</p></div>
+        <div class="card"><h3>⚡ 知道怎么用对</h3><p>监控 <code>hops=1</code> 只看对手方标签→快；自定义规则→准。最佳实践我们已经替客户踩好坑。</p></div>
       </div>
-      <div class="note key"><p><b>「用好 API」是我们的隐形卖点：</b>同样一套 API，会用和不会用差很多。我们把最佳实践直接做进了产品——比如监控用 <code>hops=1</code>「只看对手方地址本身是否触发高风险标签」，比盲目多跳<b>快一个量级</b>；再配<b>自定义规则</b>把误报压低。这份「知道怎么用对」本身就是价值。</p></div>
     </section>
 
-    <!-- 05 WHO -->
+    <!-- 07 WHO -->
     <section id="who">
-      <h2><span class="h-num">05</span>目标客户 · 谁最该买</h2>
-      <p class="sec-sub">优先找「手里过加密资金 + 有合规压力」的团队。</p>
+      <h2><span class="h-num">07</span>目标客户 · 谁最该接</h2>
+      <p class="sec-sub">优先找「手里过加密资金 + 有合规压力」的团队。大客户免费接入是我们的敲门砖。</p>
       <table class="tbl">
         <tr><th>客户类型</th><th>核心场景</th><th>切入话术</th></tr>
         <tr><td>钱包 / 托管</td><td>入金地址尽调、持续监控用户地址</td><td>「用户充进来的币，你知道上一手是谁吗？」</td></tr>
@@ -303,15 +353,15 @@ code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);pad
       </table>
     </section>
 
-    <!-- 06 DEMO -->
+    <!-- 08 DEMO -->
     <section id="demo">
-      <h2><span class="h-num">06</span>现场 Demo 脚本 · 5 步走</h2>
-      <p class="sec-sub">照着演，10 分钟讲完全流程。演示前先准备好：一个已知高风险地址、一笔可疑交易哈希。</p>
+      <h2><span class="h-num">08</span>现场 Demo 脚本 · 5 步走</h2>
+      <p class="sec-sub">用 AMLClaw 演，10 分钟讲完全流程。演示前准备好：一个已知高风险地址、一笔可疑交易哈希。</p>
       <div class="steps">
         <div class="stepc"><div class="n"></div><div>
           <h3>KYA 地址筛查——先给个「震撼弹」</h3>
-          <p>粘一个已知制裁/黑客地址，让它自动识别链，点筛查。</p>
-          <p class="say"><b>话术：</b>「你看，这个地址直接命中『严重』，右边是它跟制裁实体之间的完整资金路径——这就是我们给监管交代的证据。」</p>
+          <p>粘一个已知制裁/黑客地址，自动识别链，点筛查。</p>
+          <p class="say"><b>话术：</b>「这个地址直接命中『严重』，右边是它跟制裁实体之间的完整资金路径——这就是我们给监管交代的证据。」</p>
         </div></div>
         <div class="stepc"><div class="n"></div><div>
           <h3>KYT 交易筛查——展示方向感</h3>
@@ -336,43 +386,44 @@ code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);pad
       </div>
     </section>
 
-    <!-- 07 FAQ -->
+    <!-- 09 FAQ -->
     <section id="faq">
-      <h2><span class="h-num">07</span>异议处理 · 客户常问什么</h2>
+      <h2><span class="h-num">09</span>异议处理 · 客户常问什么</h2>
       <p class="sec-sub">点开看标准答案。核心原则：不虚，能证明。</p>
 
       <details><summary>和 Chainalysis / TRM 有什么区别？</summary>
-        <div class="a">我们<strong>自建</strong>制裁数据与标签库、覆盖 <strong>11 条链</strong>，规则<strong>可自定义</strong>；而且 AMLClaw <strong>开源、可私有部署，数据不出客户服务器</strong>——Chainalysis 是黑盒 SaaS、数据要上云、价格高。再加上 Width 对大客户<strong>免费接入</strong>，性价比是碾压级的。</div>
+        <div class="a">我们<strong>自建</strong>制裁数据与标签库、覆盖 <strong>11 条链</strong>，规则<strong>可自定义</strong>；参考应用 AMLClaw <strong>开源、可私有部署，数据不出客户服务器</strong>——Chainalysis 是黑盒 SaaS、数据要上云、价格高。再加上我们对大客户<strong>免费接入</strong>，性价比是碾压级的。</div>
       </details>
       <details><summary>数据准不准？覆盖够不够？</summary>
         <div class="a">自建制裁数据库覆盖 <strong>OFAC / UN / EU / UK</strong> 等名单，<strong>百万级</strong>标签地址，由专职情报团队持续校验，<strong>秒级</strong>检索、11 链近实时。演示时直接拿已知制裁地址命中给客户看，比嘴说管用。</div>
       </details>
       <details><summary>支持哪些链？我们主要用 BSC / 别的链。</summary>
-        <div class="a">产品目前演示 <strong>ETH（USDT+USDC）和 Tron（USDT）</strong>，地址/哈希<strong>自动识别链</strong>；底层引擎覆盖 11 条链，<strong>BSC 等可扩展</strong>。如果客户强需求某条链，记录下来我们评估排期。</div>
+        <div class="a">引擎侧覆盖 <strong>11 条链</strong>近实时；参考应用 AMLClaw 目前演示 <strong>ETH（USDT+USDC）和 Tron（USDT）</strong>，地址/哈希<strong>自动识别链</strong>，<strong>BSC 等可扩展</strong>。客户强需求某条链，记录下来我们评估排期。</div>
       </details>
       <details><summary>要收费吗？多少钱？</summary>
-        <div class="a">AMLClaw 本身<strong>开源免费</strong>；底层 Width API 对钱包、托管、支付、交易平台等大客户提供<strong>免费、含 SLA 保障</strong>的接入。落地成本主要是部署，几乎没有软件许可费——这是我们最强的临门一脚。</div>
+        <div class="a">对钱包、托管、支付、交易平台等大客户，Width 提供<strong>免费、含 SLA 保障</strong>的引擎接入；参考应用 AMLClaw <strong>开源免费</strong>。落地几乎没有软件许可费——这是我们最强的临门一脚。具体商务政策以公司口径为准。</div>
       </details>
-      <details><summary>部署复杂吗？我们技术团队不大。</summary>
-        <div class="a"><strong>无数据库</strong>、文件存储，<code>docker compose up</code> 一键起，只需一把 width.info API Key（Etherscan/TronGrid Key 可选，用于监控喂交易流）。设置页有 Test 按钮当场验 Key 通不通。</div>
+      <details><summary>接入 / 部署复杂吗？我们技术团队不大。</summary>
+        <div class="a">API 一套 REST 接口，三套内置规则集，拿 Key 即用。想快速看效果就直接部署开源的 AMLClaw：<strong>无数据库</strong>、<code>docker compose up</code> 一键起，设置页有 Test 按钮当场验 Key 通不通。</div>
       </details>
       <details><summary>会不会误报太多，淹没我们的人？</summary>
-        <div class="a">三招压误报：① 用<strong>自定义 ruleset</strong> 只保留跟业务相关的风险类别和阈值；② 入金出金用<strong>不同方向规则</strong>；③ 持续监控用 <code>hops=1</code> 只看对手方本身标签，不做深度铺开。风险还按严重度排序，先看最该看的。</div>
+        <div class="a">三招压误报：① 用<strong>自定义 ruleset</strong> 只保留相关风险类别和阈值；② 入金出金用<strong>不同方向规则</strong>；③ 按跳数分级的<strong>重要性控制</strong>。持续监控还用 <code>hops=1</code> 只看对手方本身标签，风险按严重度排序，先看最该看的。</div>
       </details>
       <details><summary>持续监控会不会又慢又费额度？</summary>
-        <div class="a">不会。监控用 <code>hops=1</code>（只查对手方地址本身的标签）、每轮只筛 <strong>[上次运行→现在]</strong> 的增量、任务<strong>串行</strong>排队尊重 API 并发上限。速度快、调用省，专为高频场景设计。</div>
+        <div class="a">不会。监控用 <code>hops=1</code>（只查对手方地址本身标签）、每轮只筛 <strong>[上次运行→现在]</strong> 增量、任务<strong>串行</strong>排队尊重 API 并发上限。速度快、调用省，专为高频场景设计。</div>
       </details>
       <details><summary>我们的数据安全吗？会上传到你们那吗？</summary>
-        <div class="a"><strong>自托管</strong>，数据留在客户自己服务器；无数据库，API Key 只存在本地、响应里还做脱敏。除了调用 Width/Etherscan/TronGrid 这几个必要 API，<strong>不外发</strong>任何数据。</div>
+        <div class="a">用开源的 AMLClaw <strong>自托管</strong>，数据留在客户自己服务器；无数据库，API Key 只存本地、响应里还脱敏。除了调用 DAIA/Etherscan/TronGrid 这几个必要 API，<strong>不外发</strong>任何数据。</div>
       </details>
     </section>
 
-    <!-- 08 GLOSSARY -->
+    <!-- 10 GLOSSARY -->
     <section id="glossary">
-      <h2><span class="h-num">08</span>术语速查</h2>
+      <h2><span class="h-num">10</span>术语速查</h2>
       <p class="sec-sub">客户抛术语时不卡壳。</p>
       <table class="tbl">
         <tr><th>术语</th><th>一句话解释</th></tr>
+        <tr><td>DAIA</td><td>我们的链上情报与风控引擎，KYA/KYT/制裁/标签能力都来自它。</td></tr>
         <tr><td>KYA</td><td>Know Your Address，查一个地址的风险（自身命中 + 间接敞口）。</td></tr>
         <tr><td>KYT</td><td>Know Your Transaction，查一笔交易的资金来源/去向是否涉险。</td></tr>
         <tr><td>hop（跳）</td><td>资金转手的层数。1 跳=直接对手方；5 跳=追溯 5 层上游。监控用 1 跳最快。</td></tr>
@@ -381,20 +432,21 @@ code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);pad
         <tr><td>Sanctions</td><td>制裁。地址涉及 OFAC 等制裁名单——最高危信号。</td></tr>
         <tr><td>Freeze</td><td>冻结。地址被公开冻结行动标记。</td></tr>
         <tr><td>风险等级</td><td>low / medium / high / critical，由规则集判定，不是一个固定分数。</td></tr>
-        <tr><td>PEP</td><td>政治公众人物，尽调中的高关注对象。</td></tr>
+        <tr><td>AMLClaw</td><td>DAIA 团队开源的参考应用，把引擎封装成开箱即用的筛查/监控工作台。</td></tr>
       </table>
     </section>
 
-    <!-- 09 CHEAT -->
+    <!-- 11 CHEAT -->
     <section id="cheat">
-      <h2><span class="h-num">09</span>一页速记</h2>
+      <h2><span class="h-num">11</span>一页速记</h2>
       <p class="sec-sub">见客户前扫一眼这块就够。</p>
       <div class="cheat">
-        <h3>AMLClaw 记忆卡</h3>
-        <div class="row"><div class="k">一句定位</div><div class="v">加密业务的「链上安检门」——脏钱进不来，每笔留痕。</div></div>
-        <div class="row"><div class="k">四大功能</div><div class="v">KYA 查地址 · KYT 查交易 · 地址监控盯未来交易 · TX 监控盯对手方。</div></div>
-        <div class="row"><div class="k">三大卖点</div><div class="v">自定义规则更精准 · 完整路径证据可审计 · 开源自托管数据不外泄。</div></div>
-        <div class="row"><div class="k">价格杀招</div><div class="v">AMLClaw 开源免费 + Width 大客户免费接入含 SLA。</div></div>
+        <h3>Width DAIA 记忆卡</h3>
+        <div class="row"><div class="k">一句定位</div><div class="v">链上情报与风控引擎——把脏钱挡在门外，每一笔都可解释可追溯。</div></div>
+        <div class="row"><div class="k">四大能力</div><div class="v">KYA 查地址 · KYT 查交易 · 制裁筛查 · 链上情报标签库。</div></div>
+        <div class="row"><div class="k">硬指标</div><div class="v">11 链 · 百万级标签 · 秒级制裁检索 · 5 跳追溯。</div></div>
+        <div class="row"><div class="k">三大卖点</div><div class="v">自建数据可自定义规则 · 完整路径证据可审计 · 大客户免费。</div></div>
+        <div class="row"><div class="k">价格杀招</div><div class="v">大客户免费接入含 SLA + 开源 AMLClaw 自托管零许可费。</div></div>
         <div class="row"><div class="k">用好 API</div><div class="v">监控 hops=1 只看对手方标签→快；自定义 ruleset→准。</div></div>
         <div class="row"><div class="k">目标客户</div><div class="v">钱包 / 托管 / 支付 / 交易所 / 持牌 VASP。</div></div>
         <div class="row"><div class="k">杀手锏演示</div><div class="v">拿已知制裁地址一筛命中「严重」+ 资金路径图。</div></div>
@@ -402,8 +454,8 @@ code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);pad
     </section>
 
     <div class="foot">
-      <span>© 2026 AMLClaw · Width DAIA 团队 · 内部销售培训材料</span>
-      <span><a href="https://github.com/amlclaw/amlclaw.com" target="_blank" rel="noopener">GitHub</a> · <a href="https://width.info/api-reference" target="_blank" rel="noopener">API 文档</a> · <a href="index.html">DAIA 官网</a></span>
+      <span>© 2026 Width DAIA · 内部销售培训材料</span>
+      <span><a href="index.html">DAIA 官网</a> · <a href="https://width.info/api-reference" target="_blank" rel="noopener">API 文档</a> · <a href="https://github.com/amlclaw/amlclaw.com" target="_blank" rel="noopener">AMLClaw GitHub</a></span>
     </div>
 
   </main>
