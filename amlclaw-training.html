@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMLClaw 销售培训手册 · Sales Enablement</title>
+<meta name="description" content="AMLClaw 销售培训手册：定位、客户痛点、四大功能讲解、核心卖点、目标客户、现场 Demo 脚本、异议处理与话术、术语速查。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0f1e'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%2322d3ee' font-family='Arial' font-weight='bold'>A</text></svg>">
+<style>
+:root{
+  --bg:#0a0f1e; --bg-alt:#0d1526; --panel:#111a30; --panel-2:#0e1729;
+  --border:rgba(148,163,184,.14); --border-strong:rgba(148,163,184,.26);
+  --text:#e7edf7; --muted:#93a3bc; --muted-2:#6b7c96;
+  --accent:#22d3ee; --accent-2:#3b82f6;
+  --green:#34d399; --amber:#fbbf24; --red:#f87171; --violet:#a78bfa;
+  --radius:14px; --mono:ui-monospace,SFMono-Regular,Menlo,"Roboto Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);line-height:1.7;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent);text-decoration:none}
+.wrap{display:grid;grid-template-columns:250px 1fr;max-width:1240px;margin:0 auto;gap:0}
+
+/* ===== Sidebar ===== */
+.side{
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:26px 18px 40px;
+  border-right:1px solid var(--border);background:rgba(10,15,30,.6);
+}
+.side .brand{font-size:20px;font-weight:800;letter-spacing:.5px;margin-bottom:4px}
+.side .brand span{color:var(--accent)}
+.side .brand-sub{font-size:11.5px;color:var(--muted-2);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+.toc a{display:block;color:var(--muted);font-size:13.5px;padding:7px 12px;border-radius:8px;border-left:2px solid transparent;transition:.15s}
+.toc a:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.toc a.active{color:var(--accent);border-left-color:var(--accent);background:rgba(34,211,238,.06)}
+.toc .num{color:var(--muted-2);font-family:var(--mono);font-size:11px;margin-right:8px}
+.side .print-btn{
+  margin-top:24px;width:100%;background:transparent;border:1px solid var(--border-strong);color:var(--muted);
+  padding:9px;border-radius:9px;font-size:12.5px;cursor:pointer;transition:.15s;
+}
+.side .print-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== Main ===== */
+.main{padding:44px 54px 100px;min-width:0}
+.kicker{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+h1{font-size:38px;font-weight:800;letter-spacing:-.5px;margin:12px 0 10px;line-height:1.2}
+.lede{color:var(--muted);font-size:17px;max-width:760px}
+.meta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.chip{font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:5px 13px}
+.chip b{color:var(--text)}
+
+section{padding-top:52px;scroll-margin-top:20px}
+h2{font-size:26px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+h2 .h-num{font-family:var(--mono);font-size:15px;color:var(--accent);font-weight:700}
+.sec-sub{color:var(--muted);font-size:15px;margin-bottom:22px;max-width:820px}
+h3{font-size:17px;font-weight:700;margin:22px 0 8px}
+p{color:var(--muted);font-size:14.8px;margin-bottom:10px}
+p strong,li strong{color:var(--text)}
+ul{margin:6px 0 12px 4px;list-style:none}
+li{color:var(--muted);font-size:14.8px;padding-left:20px;position:relative;margin-bottom:7px}
+li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-size:12px;top:2px}
+
+.divider{height:1px;background:var(--border);margin-top:52px}
+
+/* pitch box */
+.pitch{
+  background:linear-gradient(160deg,rgba(34,211,238,.10),rgba(59,130,246,.05));
+  border:1px solid rgba(34,211,238,.28);border-radius:16px;padding:28px 30px;margin-top:8px;
+}
+.pitch .q{font-size:12px;letter-spacing:2px;color:var(--accent);font-weight:700;text-transform:uppercase;margin-bottom:12px}
+.pitch p{font-size:16.5px;color:var(--text);line-height:1.8;margin:0}
+
+/* cards */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px 22px}
+.card.feat{border-top:3px solid var(--accent)}
+.card .tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;color:#06202a;background:var(--accent);padding:2px 9px;border-radius:6px;margin-bottom:12px}
+.card h3{margin-top:0;font-size:18px}
+.card .role{font-size:12.5px;color:var(--accent);font-weight:600;margin-bottom:8px}
+.card p{font-size:14px}
+.card .demo{margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);font-size:13px;color:var(--muted-2)}
+.card .demo b{color:var(--accent)}
+
+/* steps */
+.steps{counter-reset:s;margin-top:8px}
+.stepc{display:flex;gap:18px;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:14px}
+.stepc .n{counter-increment:s;flex-shrink:0;width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#06121f;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+.stepc .n::before{content:counter(s)}
+.stepc h3{margin:2px 0 6px;font-size:16px}
+.stepc p{margin:0;font-size:14px}
+.stepc .say{margin-top:8px;font-size:13.5px;color:var(--text);border-left:2px solid var(--accent);padding-left:12px}
+.stepc .say b{color:var(--accent);font-weight:600}
+
+/* faq */
+details{background:var(--panel);border:1px solid var(--border);border-radius:12px;margin-bottom:11px;overflow:hidden}
+details[open]{border-color:var(--border-strong)}
+summary{cursor:pointer;padding:16px 20px;font-weight:700;font-size:15px;color:var(--text);list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-size:22px;font-weight:400;flex-shrink:0}
+details[open] summary::after{content:"–"}
+details .a{padding:0 20px 18px;color:var(--muted);font-size:14.5px}
+details .a strong{color:var(--text)}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;margin-top:8px;font-size:14px;overflow:hidden;border-radius:12px;border:1px solid var(--border)}
+.tbl th,.tbl td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--border)}
+.tbl th{background:var(--panel-2);color:var(--text);font-weight:700;font-size:13px}
+.tbl td{color:var(--muted)}
+.tbl td:first-child{color:var(--text);font-weight:600;white-space:nowrap;font-family:var(--mono);font-size:13px}
+.tbl tr:last-child td{border-bottom:0}
+
+/* callouts */
+.note{border-radius:12px;padding:15px 18px;font-size:14px;margin:14px 0;border:1px solid}
+.note.tip{background:rgba(52,211,153,.07);border-color:rgba(52,211,153,.28)}
+.note.tip b{color:var(--green)}
+.note.warn{background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.28)}
+.note.warn b{color:var(--amber)}
+.note.key{background:rgba(167,139,250,.07);border-color:rgba(167,139,250,.28)}
+.note.key b{color:var(--violet)}
+.note p{margin:0;color:var(--muted)}
+code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);padding:1px 6px;border-radius:5px;color:var(--accent)}
+
+/* cheat */
+.cheat{background:var(--panel);border:1px solid var(--border-strong);border-radius:16px;padding:26px 28px;margin-top:8px}
+.cheat h3{margin-top:0;color:var(--accent)}
+.cheat .row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14.5px}
+.cheat .row:last-child{border-bottom:0}
+.cheat .row .k{flex-shrink:0;width:120px;color:var(--muted-2);font-size:13px;font-weight:600}
+.cheat .row .v{color:var(--text)}
+
+.foot{margin-top:70px;padding-top:24px;border-top:1px solid var(--border);color:var(--muted-2);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media(max-width:960px){
+  .wrap{grid-template-columns:1fr}
+  .side{display:none}
+  .main{padding:30px 22px 70px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  h1{font-size:30px}
+}
+@media print{
+  .side,.print-btn{display:none}
+  body{background:#fff;color:#111}
+  .wrap{grid-template-columns:1fr}
+  section{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side">
+    <div class="brand">AML<span>Claw</span></div>
+    <div class="brand-sub">Sales Enablement</div>
+    <nav class="toc" id="toc">
+      <a href="#pitch"><span class="num">00</span>30秒电梯陈述</a>
+      <a href="#what"><span class="num">01</span>这是什么</a>
+      <a href="#why"><span class="num">02</span>客户为什么需要</a>
+      <a href="#features"><span class="num">03</span>四大功能</a>
+      <a href="#edge"><span class="num">04</span>核心卖点</a>
+      <a href="#who"><span class="num">05</span>目标客户</a>
+      <a href="#demo"><span class="num">06</span>现场 Demo 脚本</a>
+      <a href="#faq"><span class="num">07</span>异议处理 FAQ</a>
+      <a href="#glossary"><span class="num">08</span>术语速查</a>
+      <a href="#cheat"><span class="num">09</span>一页速记</a>
+    </nav>
+    <button class="print-btn" onclick="window.print()">🖨 打印 / 存为 PDF</button>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <header>
+      <p class="kicker">内部销售培训 · 市场团队专用</p>
+      <h1>AMLClaw 销售培训手册</h1>
+      <p class="lede">一份给市场 / 销售同学的实战讲解材料：怎么用一句话讲清产品、客户为什么买单、四大功能怎么演示、遇到刁钻问题怎么接。看完这一页，你就能独立给客户开场。</p>
+      <div class="meta-row">
+        <span class="chip"><b>产品</b> AMLClaw · 加密合规工作台</span>
+        <span class="chip"><b>底层</b> Width DAIA · KYA/KYT API</span>
+        <span class="chip"><b>形态</b> 开源 · MIT · 可私有部署</span>
+      </div>
+    </header>
+
+    <!-- 00 PITCH -->
+    <section id="pitch">
+      <h2><span class="h-num">00</span>30 秒电梯陈述</h2>
+      <p class="sec-sub">见客户第一句话就用它。记住三个词：<strong>看清来源 · 持续盯防 · 留下证据</strong>。</p>
+      <div class="pitch">
+        <div class="q">背下来 → 张口就来</div>
+        <p>「AMLClaw 是 Width DAIA 团队开源的一套<strong>加密反洗钱合规工作台</strong>。客户只要<strong>一把 API Key</strong>，就能对任意<strong>地址</strong>、任意<strong>交易</strong>做制裁与风险筛查；还能 7×24 <strong>持续监控</strong>一个地址后续的每一笔资金往来——一旦碰上制裁、混币、黑客这些脏钱，<strong>立刻告警</strong>，并留下完整的链上<strong>路径证据</strong>。它<strong>自托管、开源免费、数据不出客户服务器</strong>，就是钱包、支付、交易所做合规的一道『链上安检门』。」</p>
+      </div>
+      <div class="note tip"><p><b>一句话版本：</b>给加密业务装一道链上安检门——脏钱进不来，每一笔都留痕。</p></div>
+    </section>
+
+    <!-- 01 WHAT -->
+    <section id="what">
+      <h2><span class="h-num">01</span>这是什么 · 和 Width / DAIA 什么关系</h2>
+      <p class="sec-sub">先把「引擎」和「应用」这层关系讲清楚，客户最容易在这里绕晕。</p>
+      <div class="grid3">
+        <div class="card">
+          <div class="role">底层引擎</div>
+          <h3>Width · DAIA</h3>
+          <p>链上情报与风控引擎：覆盖 11 条链的地址/交易筛查、自建制裁数据库、百万级标签地址、最深 5 跳资金追溯。这是「数据和能力」的来源。</p>
+        </div>
+        <div class="card">
+          <div class="role">对外 API</div>
+          <h3>KYA / KYT API（V3）</h3>
+          <p>把引擎能力开放成一套 REST API：<code>KYA</code> 查地址、<code>KYT</code> 查交易。客户拿一把 Key 就能调。</p>
+        </div>
+        <div class="card feat">
+          <div class="role">上层应用（我们卖的）</div>
+          <h3>AMLClaw</h3>
+          <p>把 API 封装成开箱即用的业务界面——筛查、监控、台账、证据报告。客户不用自己写代码，装上就能用。</p>
+        </div>
+      </div>
+      <div class="note key"><p><b>类比帮客户理解：</b>DAIA 是「发动机」，KYA/KYT API 是「油管接口」，<b>AMLClaw 就是整台可以直接开走的车</b>。客户既可以只接 API 自己造车，也可以直接用我们这台开源的车。</p></div>
+    </section>
+
+    <!-- 02 WHY -->
+    <section id="why">
+      <h2><span class="h-num">02</span>客户为什么需要它</h2>
+      <p class="sec-sub">卖的不是功能，是「不出事」。先戳痛点，再给方案。</p>
+      <h3>客户的三大痛点</h3>
+      <ul>
+        <li><strong>监管压力</strong>：MAS、FATF Travel Rule、各地牌照都要求对加密资金做 AML/KYT，做不到就拿不到 / 保不住牌照。</li>
+        <li><strong>脏钱风险</strong>：一旦收了制裁地址、混币器、黑客赃款的钱，账户可能被冻结、被追责，声誉和资金双输。</li>
+        <li><strong>说不清</strong>：出事时监管问「你当时怎么判断这笔干净？」，客户拿不出证据链，等于裸奔。</li>
+      </ul>
+      <h3>AMLClaw 怎么对症</h3>
+      <ul>
+        <li>痛点一 → <strong>事前筛查</strong>：入金/出金前先查地址和交易，脏钱挡在门外。</li>
+        <li>痛点二 → <strong>事中监控</strong>：地址收钱后持续盯，脏钱流入立刻告警，不是查一次就完。</li>
+        <li>痛点三 → <strong>可解释证据</strong>：每次命中都返回触发的<strong>具体规则 + 资金路径图</strong>，即拿即用的审计依据。</li>
+      </ul>
+    </section>
+
+    <!-- 03 FEATURES -->
+    <section id="features">
+      <h2><span class="h-num">03</span>四大功能 · 怎么讲怎么演</h2>
+      <p class="sec-sub">每个功能记住：<strong>一句话定位 → 解决什么 → 演示看点</strong>。</p>
+      <div class="grid2">
+        <div class="card feat">
+          <span class="tag">KYA</span>
+          <h3>地址筛查</h3>
+          <p><strong>定位：</strong>查「这个地址干不干净」。粘一个 ETH 或 Tron 地址（自动识别链），做 0–5 跳的自身命中 + 间接敞口筛查——制裁、恐怖融资、混币器、黑客、暗网等。</p>
+          <p><strong>解决：</strong>开户、上币、大额入金前的尽调（KYC/CDD）。</p>
+          <div class="demo"><b>演示看点：</b>风险等级（低/中/高/严重）+ 命中的具体规则 + 可交互的资金流向图。</div>
+        </div>
+        <div class="card feat">
+          <span class="tag">KYT</span>
+          <h3>交易筛查</h3>
+          <p><strong>定位：</strong>查「这一笔交易的钱脏不脏」。粘一笔交易哈希，选方向——<code>in</code> 查资金来源、<code>out</code> 查去向、或两者都查，入金出金用<strong>不同的规则</strong>。</p>
+          <p><strong>解决：</strong>每一笔充值/提现的实时放行判断。</p>
+          <div class="demo"><b>演示看点：</b>与 Chainalysis 对齐的处置建议（拦截/复核/告警/监控）+ 逐笔路径证据。</div>
+        </div>
+        <div class="card feat">
+          <span class="tag">地址监控</span>
+          <h3>盯住一个地址的未来交易</h3>
+          <p><strong>定位：</strong>添加一个地址，自动盯它<strong>后续每一笔</strong>稳定币转账（ETH: USDT+USDC，Tron: USDT），按计划（每小时~每天）对每笔新交易自动 KYT——收款算 in、付款算 out。</p>
+          <p><strong>解决：</strong>「查一次干净不代表永远干净」，持续风控。</p>
+          <div class="demo"><b>演示看点：</b>全量交易入台账（像区块浏览器），可只看有问题的，还能出「某时段共 X 笔、其中 Y 笔严重」的统计——<b>证明我们把每一笔都检测了</b>。</div>
+        </div>
+        <div class="card feat">
+          <span class="tag">TX 监控</span>
+          <h3>盯住一个对手方</h3>
+          <p><strong>定位：</strong>从任意 KYT 结果里，把这笔交易的 <code>from</code> 或 <code>to</code> 地址加入监控，周期性 KYA 复筛它<strong>本身的标签变化</strong>。</p>
+          <p><strong>解决：</strong>今天干净的对手方，明天可能被打上制裁/冻结标签——第一时间知道。</p>
+          <div class="demo"><b>演示看点：</b>一旦对手方涉及 <b>Sanctions（制裁）/ Freeze（冻结）</b> 或风险等级升级，立即告警。</div>
+        </div>
+      </div>
+      <div class="note tip"><p><b>讲功能的节奏：</b>KYA/KYT 是「进门安检」（事前一次性查），两个监控是「巡逻队」（事中持续查）。客户几乎都会问「查完之后怎么办」——答案就是两个监控。</p></div>
+    </section>
+
+    <!-- 04 EDGE -->
+    <section id="edge">
+      <h2><span class="h-num">04</span>核心卖点 · 我们凭什么赢</h2>
+      <p class="sec-sub">这些是打单时反复强调的差异化。</p>
+      <div class="grid3">
+        <div class="card"><h3>🗄 服务端规则</h3><p>规则集在服务端维护，客户本地不用养规则库。用内置默认，也能<strong>自定义 ruleset</strong>，按业务挑类别和阈值。</p></div>
+        <div class="card"><h3>🔎 完整路径证据</h3><p>每次命中都给出触发的规则和资金流向图，天然是给监管看的审计链。</p></div>
+        <div class="card"><h3>⚡ 监控又快又省</h3><p>持续监控用 <code>hops=1</code>、滚动窗口只筛增量、串行调用——速度快、API 调用省。</p></div>
+        <div class="card"><h3>🔓 开源可私有部署</h3><p>MIT 开源、无数据库，<strong>数据不出客户服务器</strong>，一把 Key、Docker 一键起，随处部署。</p></div>
+        <div class="card"><h3>🌐 自建数据 · 11 链</h3><p>自建制裁数据库（OFAC/UN/EU/UK）、百万级标签、11 条链近实时，秒级检索。</p></div>
+        <div class="card"><h3>💸 大客户免费</h3><p>Width 对钱包/托管/支付/交易平台提供<strong>免费、含 SLA</strong> 的引擎接入——极强的价格杀伤力。</p></div>
+      </div>
+      <div class="note key"><p><b>「用好 API」是我们的隐形卖点：</b>同样一套 API，会用和不会用差很多。我们把最佳实践直接做进了产品——比如监控用 <code>hops=1</code>「只看对手方地址本身是否触发高风险标签」，比盲目多跳<b>快一个量级</b>；再配<b>自定义规则</b>把误报压低。这份「知道怎么用对」本身就是价值。</p></div>
+    </section>
+
+    <!-- 05 WHO -->
+    <section id="who">
+      <h2><span class="h-num">05</span>目标客户 · 谁最该买</h2>
+      <p class="sec-sub">优先找「手里过加密资金 + 有合规压力」的团队。</p>
+      <table class="tbl">
+        <tr><th>客户类型</th><th>核心场景</th><th>切入话术</th></tr>
+        <tr><td>钱包 / 托管</td><td>入金地址尽调、持续监控用户地址</td><td>「用户充进来的币，你知道上一手是谁吗？」</td></tr>
+        <tr><td>支付 / 代付</td><td>每笔充值提现的实时 KYT 放行</td><td>「每笔代付前，能不能 1 秒判断这笔钱干不干净？」</td></tr>
+        <tr><td>交易所 / OTC</td><td>大额入金 KYA + 提现 KYT + 对手方监控</td><td>「收了制裁地址的钱，账户被冻你担得起吗？」</td></tr>
+        <tr><td>持牌机构 / VASP</td><td>满足 MAS PSN02、FATF Travel Rule</td><td>「监管要的证据链，你现在拿得出来吗？」</td></tr>
+      </table>
+    </section>
+
+    <!-- 06 DEMO -->
+    <section id="demo">
+      <h2><span class="h-num">06</span>现场 Demo 脚本 · 5 步走</h2>
+      <p class="sec-sub">照着演，10 分钟讲完全流程。演示前先准备好：一个已知高风险地址、一笔可疑交易哈希。</p>
+      <div class="steps">
+        <div class="stepc"><div class="n"></div><div>
+          <h3>KYA 地址筛查——先给个「震撼弹」</h3>
+          <p>粘一个已知制裁/黑客地址，让它自动识别链，点筛查。</p>
+          <p class="say"><b>话术：</b>「你看，这个地址直接命中『严重』，右边是它跟制裁实体之间的完整资金路径——这就是我们给监管交代的证据。」</p>
+        </div></div>
+        <div class="stepc"><div class="n"></div><div>
+          <h3>KYT 交易筛查——展示方向感</h3>
+          <p>粘一笔交易哈希，选 <code>in</code> 查来源，再切 <code>out</code> 查去向。</p>
+          <p class="say"><b>话术：</b>「同一笔交易，进和出用不同规则。系统直接告诉你该拦截还是放行，不用人肉判断。」</p>
+        </div></div>
+        <div class="stepc"><div class="n"></div><div>
+          <h3>地址监控——证明「全量、不漏」</h3>
+          <p>添加一个活跃地址，打开交易台账，切「只看有问题的」，展示时段统计。</p>
+          <p class="say"><b>话术：</b>「它后续每一笔我们都自动检测了，这是台账；这个时段共 128 笔，其中 3 笔严重——一笔都没漏。」</p>
+        </div></div>
+        <div class="stepc"><div class="n"></div><div>
+          <h3>TX 监控——讲「持续盯对手方」</h3>
+          <p>从刚才的 KYT 结果，把对手方加入监控，说明 <code>hops=1</code> 只看它本身标签。</p>
+          <p class="say"><b>话术：</b>「今天干净不代表明天，一旦这个对手方被打上制裁或冻结标签，你第一时间收到告警。」</p>
+        </div></div>
+        <div class="stepc"><div class="n"></div><div>
+          <h3>设置——收尾讲「可控 + 安全」</h3>
+          <p>展示三把 Key 的 Test 按钮、自定义 ruleset id，强调数据自托管。</p>
+          <p class="say"><b>话术：</b>「规则你自己定，越贴业务越准；整套开源自部署，数据不出你的服务器。」</p>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- 07 FAQ -->
+    <section id="faq">
+      <h2><span class="h-num">07</span>异议处理 · 客户常问什么</h2>
+      <p class="sec-sub">点开看标准答案。核心原则：不虚，能证明。</p>
+
+      <details><summary>和 Chainalysis / TRM 有什么区别？</summary>
+        <div class="a">我们<strong>自建</strong>制裁数据与标签库、覆盖 <strong>11 条链</strong>，规则<strong>可自定义</strong>；而且 AMLClaw <strong>开源、可私有部署，数据不出客户服务器</strong>——Chainalysis 是黑盒 SaaS、数据要上云、价格高。再加上 Width 对大客户<strong>免费接入</strong>，性价比是碾压级的。</div>
+      </details>
+      <details><summary>数据准不准？覆盖够不够？</summary>
+        <div class="a">自建制裁数据库覆盖 <strong>OFAC / UN / EU / UK</strong> 等名单，<strong>百万级</strong>标签地址，由专职情报团队持续校验，<strong>秒级</strong>检索、11 链近实时。演示时直接拿已知制裁地址命中给客户看，比嘴说管用。</div>
+      </details>
+      <details><summary>支持哪些链？我们主要用 BSC / 别的链。</summary>
+        <div class="a">产品目前演示 <strong>ETH（USDT+USDC）和 Tron（USDT）</strong>，地址/哈希<strong>自动识别链</strong>；底层引擎覆盖 11 条链，<strong>BSC 等可扩展</strong>。如果客户强需求某条链，记录下来我们评估排期。</div>
+      </details>
+      <details><summary>要收费吗？多少钱？</summary>
+        <div class="a">AMLClaw 本身<strong>开源免费</strong>；底层 Width API 对钱包、托管、支付、交易平台等大客户提供<strong>免费、含 SLA 保障</strong>的接入。落地成本主要是部署，几乎没有软件许可费——这是我们最强的临门一脚。</div>
+      </details>
+      <details><summary>部署复杂吗？我们技术团队不大。</summary>
+        <div class="a"><strong>无数据库</strong>、文件存储，<code>docker compose up</code> 一键起，只需一把 width.info API Key（Etherscan/TronGrid Key 可选，用于监控喂交易流）。设置页有 Test 按钮当场验 Key 通不通。</div>
+      </details>
+      <details><summary>会不会误报太多，淹没我们的人？</summary>
+        <div class="a">三招压误报：① 用<strong>自定义 ruleset</strong> 只保留跟业务相关的风险类别和阈值；② 入金出金用<strong>不同方向规则</strong>；③ 持续监控用 <code>hops=1</code> 只看对手方本身标签，不做深度铺开。风险还按严重度排序，先看最该看的。</div>
+      </details>
+      <details><summary>持续监控会不会又慢又费额度？</summary>
+        <div class="a">不会。监控用 <code>hops=1</code>（只查对手方地址本身的标签）、每轮只筛 <strong>[上次运行→现在]</strong> 的增量、任务<strong>串行</strong>排队尊重 API 并发上限。速度快、调用省，专为高频场景设计。</div>
+      </details>
+      <details><summary>我们的数据安全吗？会上传到你们那吗？</summary>
+        <div class="a"><strong>自托管</strong>，数据留在客户自己服务器；无数据库，API Key 只存在本地、响应里还做脱敏。除了调用 Width/Etherscan/TronGrid 这几个必要 API，<strong>不外发</strong>任何数据。</div>
+      </details>
+    </section>
+
+    <!-- 08 GLOSSARY -->
+    <section id="glossary">
+      <h2><span class="h-num">08</span>术语速查</h2>
+      <p class="sec-sub">客户抛术语时不卡壳。</p>
+      <table class="tbl">
+        <tr><th>术语</th><th>一句话解释</th></tr>
+        <tr><td>KYA</td><td>Know Your Address，查一个地址的风险（自身命中 + 间接敞口）。</td></tr>
+        <tr><td>KYT</td><td>Know Your Transaction，查一笔交易的资金来源/去向是否涉险。</td></tr>
+        <tr><td>hop（跳）</td><td>资金转手的层数。1 跳=直接对手方；5 跳=追溯 5 层上游。监控用 1 跳最快。</td></tr>
+        <tr><td>ruleset</td><td>规则集。决定命中哪些风险类别、什么阈值算风险。可用默认或自定义。</td></tr>
+        <tr><td>in / out</td><td>方向。收款=in（查钱从哪来），付款=out（查钱到哪去）。</td></tr>
+        <tr><td>Sanctions</td><td>制裁。地址涉及 OFAC 等制裁名单——最高危信号。</td></tr>
+        <tr><td>Freeze</td><td>冻结。地址被公开冻结行动标记。</td></tr>
+        <tr><td>风险等级</td><td>low / medium / high / critical，由规则集判定，不是一个固定分数。</td></tr>
+        <tr><td>PEP</td><td>政治公众人物，尽调中的高关注对象。</td></tr>
+      </table>
+    </section>
+
+    <!-- 09 CHEAT -->
+    <section id="cheat">
+      <h2><span class="h-num">09</span>一页速记</h2>
+      <p class="sec-sub">见客户前扫一眼这块就够。</p>
+      <div class="cheat">
+        <h3>AMLClaw 记忆卡</h3>
+        <div class="row"><div class="k">一句定位</div><div class="v">加密业务的「链上安检门」——脏钱进不来，每笔留痕。</div></div>
+        <div class="row"><div class="k">四大功能</div><div class="v">KYA 查地址 · KYT 查交易 · 地址监控盯未来交易 · TX 监控盯对手方。</div></div>
+        <div class="row"><div class="k">三大卖点</div><div class="v">自定义规则更精准 · 完整路径证据可审计 · 开源自托管数据不外泄。</div></div>
+        <div class="row"><div class="k">价格杀招</div><div class="v">AMLClaw 开源免费 + Width 大客户免费接入含 SLA。</div></div>
+        <div class="row"><div class="k">用好 API</div><div class="v">监控 hops=1 只看对手方标签→快；自定义 ruleset→准。</div></div>
+        <div class="row"><div class="k">目标客户</div><div class="v">钱包 / 托管 / 支付 / 交易所 / 持牌 VASP。</div></div>
+        <div class="row"><div class="k">杀手锏演示</div><div class="v">拿已知制裁地址一筛命中「严重」+ 资金路径图。</div></div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <span>© 2026 AMLClaw · Width DAIA 团队 · 内部销售培训材料</span>
+      <span><a href="https://github.com/amlclaw/amlclaw.com" target="_blank" rel="noopener">GitHub</a> · <a href="https://width.info/api-reference" target="_blank" rel="noopener">API 文档</a> · <a href="index.html">DAIA 官网</a></span>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// active TOC highlight
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#toc a'));
+  var map={}; links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){l.classList.remove('active');});
+        if(map[e.target.id]) map[e.target.id].classList.add('active');
+      }
+    });
+  },{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('section[id]').forEach(function(s){obs.observe(s);});
+})();
+</script>
+</body>
+</html>
