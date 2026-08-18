@@ -48,29 +48,20 @@
       <!-- fund-flow graph illustration -->
       <div class="hero-graph">
         <svg viewBox="0 0 800 470" role="img" aria-label="Fund-flow graph: a screened address surrounded by labeled counterparties">
-          <defs>
-            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="#93a3bc"/>
-            </marker>
-            <marker id="arr-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 z" fill="#6b7c96"/>
-            </marker>
-          </defs>
-
           <!-- hop rings -->
-          <circle cx="400" cy="250" r="118" fill="none" stroke="rgba(148,163,184,0.16)" stroke-dasharray="3 6"/>
+          <circle cx="400" cy="250" r="150" fill="none" stroke="rgba(148,163,184,0.16)" stroke-dasharray="3 6"/>
           <circle cx="400" cy="250" r="225" fill="none" stroke="rgba(148,163,184,0.10)" stroke-dasharray="3 6"/>
           <text x="566" y="40" font-size="11" fill="#6b7c96" font-family="ui-monospace,Menlo,monospace">2+ hops · 间接关联</text>
           <text x="566" y="54" font-size="11" fill="#6b7c96" font-family="ui-monospace,Menlo,monospace">1 hop · 直接对手方</text>
 
           <!-- edges: center -> 1-hop -->
-          <line x1="400" y1="250" x2="400" y2="158" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
-          <line x1="400" y1="250" x2="362" y2="250" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
-          <line x1="400" y1="250" x2="438" y2="250" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
-          <line x1="400" y1="250" x2="315" y2="307" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
-          <line x1="400" y1="250" x2="485" y2="307" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <line x1="400" y1="250" x2="400" y2="126" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <line x1="400" y1="250" x2="325" y2="250" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <line x1="400" y1="250" x2="475" y2="250" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <line x1="400" y1="250" x2="294" y2="330" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <line x1="400" y1="250" x2="506" y2="330" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
           <!-- 2-hop edge: mixer -> darknet -->
-          <line x1="518" y1="224" x2="595" y2="163" stroke="#6b7c96" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#arr-faint)"/>
+          <line x1="550" y1="224" x2="595" y2="163" stroke="#6b7c96" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#arr-faint)"/>
 
           <!-- 2-hop: darknet -->
           <g>
@@ -81,42 +72,42 @@
 
           <!-- 1-hop: DeFi -->
           <g>
-            <rect x="330" y="106" width="140" height="52" rx="12" fill="#0e2a22" stroke="#34d399" stroke-opacity="0.7" stroke-width="1.4"/>
-            <text x="400" y="128" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">DeFi</text>
-            <text x="400" y="146" font-size="11" fill="#34d399" text-anchor="middle">协议 · 中性</text>
+            <rect x="325" y="74" width="150" height="52" rx="12" fill="#0e2a22" stroke="#34d399" stroke-opacity="0.7" stroke-width="1.4"/>
+            <text x="400" y="96" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">DeFi</text>
+            <text x="400" y="114" font-size="11" fill="#34d399" text-anchor="middle">协议 · 中性</text>
           </g>
 
           <!-- 1-hop: CEX -->
           <g>
-            <rect x="202" y="224" width="160" height="52" rx="12" fill="#0e2233" stroke="#3b82f6" stroke-opacity="0.8" stroke-width="1.4"/>
-            <text x="282" y="246" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">CEX</text>
-            <text x="282" y="264" font-size="11" fill="#3b82f6" text-anchor="middle">交易所 · 免疫</text>
+            <rect x="175" y="224" width="150" height="52" rx="12" fill="#0e2233" stroke="#3b82f6" stroke-opacity="0.8" stroke-width="1.4"/>
+            <text x="250" y="246" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">CEX</text>
+            <text x="250" y="264" font-size="11" fill="#3b82f6" text-anchor="middle">交易所 · 免疫</text>
           </g>
 
           <!-- 1-hop: Mixer -->
           <g>
-            <rect x="438" y="224" width="160" height="52" rx="12" fill="#2a1f0e" stroke="#fbbf24" stroke-opacity="0.85" stroke-width="1.4"/>
-            <text x="518" y="246" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Mixer</text>
-            <text x="518" y="264" font-size="11" fill="#fbbf24" text-anchor="middle">混币器 · 高风险</text>
+            <rect x="475" y="224" width="150" height="52" rx="12" fill="#2a1f0e" stroke="#fbbf24" stroke-opacity="0.85" stroke-width="1.4"/>
+            <text x="550" y="246" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Mixer</text>
+            <text x="550" y="264" font-size="11" fill="#fbbf24" text-anchor="middle">混币器 · 高风险</text>
           </g>
 
           <!-- 1-hop: Sanctions -->
           <g>
-            <rect x="235" y="307" width="160" height="52" rx="12" fill="#2a1010" stroke="#f87171" stroke-opacity="0.85" stroke-width="1.4"/>
-            <text x="315" y="329" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Sanctions</text>
-            <text x="315" y="347" font-size="11" fill="#f87171" text-anchor="middle">制裁实体 · critical</text>
+            <rect x="219" y="330" width="150" height="52" rx="12" fill="#2a1010" stroke="#f87171" stroke-opacity="0.85" stroke-width="1.4"/>
+            <text x="294" y="352" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Sanctions</text>
+            <text x="294" y="370" font-size="11" fill="#f87171" text-anchor="middle">制裁实体 · critical</text>
           </g>
 
           <!-- 1-hop: Hacker -->
           <g>
-            <rect x="405" y="307" width="160" height="52" rx="12" fill="#2a1010" stroke="#f87171" stroke-opacity="0.85" stroke-width="1.4"/>
-            <text x="485" y="329" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Hacker</text>
-            <text x="485" y="347" font-size="11" fill="#f87171" text-anchor="middle">黑客地址 · critical</text>
+            <rect x="431" y="330" width="150" height="52" rx="12" fill="#2a1010" stroke="#f87171" stroke-opacity="0.85" stroke-width="1.4"/>
+            <text x="506" y="352" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Hacker</text>
+            <text x="506" y="370" font-size="11" fill="#f87171" text-anchor="middle">黑客地址 · critical</text>
           </g>
 
           <!-- center: screened address -->
           <g>
-            <rect x="310" y="224" width="180" height="52" rx="14" fill="#0a1424" stroke="#22d3ee" stroke-width="2.4"/>
+            <rect x="330" y="224" width="140" height="52" rx="14" fill="#0a1424" stroke="#22d3ee" stroke-width="2.4"/>
             <text x="400" y="246" font-size="14.5" font-weight="800" fill="#22d3ee" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">0x8a…c21e</text>
             <text x="400" y="265" font-size="11" fill="#93a3bc" text-anchor="middle">被筛地址 · Screened</text>
           </g>
