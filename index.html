@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAIA — On-chain Intelligence &amp; Risk Engine</title>
-  <meta name="description" content="DAIA is an on-chain intelligence and risk engine: real-time address & transaction screening, sanctions data and fund tracing across 11 chains. Free for enterprise partners.">
+  <title>DART — Digital Asset Risk Targeting</title>
+  <meta name="description" content="DART (Digital Asset Risk Targeting) is an on-chain AML risk engine: address labels + fund-flow path tracing, your own risk rulesets, and an explainable 0–100 risk score. Free for enterprise partners.">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0f1e'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%2322d3ee' font-family='Arial' font-weight='bold'>D</text></svg>">
 </head>
@@ -12,11 +12,13 @@
 
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="#top">DAIA<span class="brand-dot">.</span></a>
+    <a class="brand" href="#top">DART<span class="brand-dot">.</span></a>
     <nav class="nav-links">
-      <a href="#products" data-i18n="nav.products">Products</a>
       <a href="#how" data-i18n="nav.how">How it works</a>
-      <a href="#amlclaw" data-i18n="nav.amlclaw">AMLClaw</a>
+      <a href="#rulesets" data-i18n="nav.rulesets">Rulesets</a>
+      <a href="#scoring" data-i18n="nav.scoring">Scoring</a>
+      <a href="#caps" data-i18n="nav.caps">Capabilities</a>
+      <a href="#docs" data-i18n="nav.docs">Docs</a>
       <a href="#free" data-i18n="nav.free">Free Access</a>
     </nav>
     <div class="nav-right">
@@ -35,12 +37,106 @@
   <section class="hero">
     <div class="hero-glow"></div>
     <div class="container hero-inner">
-      <p class="hero-kicker" data-i18n="hero.kicker">ON-CHAIN INTELLIGENCE &amp; RISK ENGINE</p>
+      <p class="hero-kicker" data-i18n="hero.kicker">DIGITAL ASSET RISK TARGETING</p>
       <h1 class="hero-title" data-i18n="hero.title">Know where the money comes from.<br>Keep bad funds out.</h1>
-      <p class="hero-sub" data-i18n="hero.sub">DAIA is an on-chain intelligence and risk engine — real-time address &amp; transaction screening, self-built sanctions data and multi-hop fund tracing across 11 chains. Free for enterprise partners.</p>
+      <p class="hero-sub" data-i18n="hero.sub">DART traces every fund-flow chain across labeled addresses and turns any address or transaction into an explainable 0–100 risk score — you decide which chains count as risky, and how many points they cost.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://width.info" target="_blank" rel="noopener" data-i18n="hero.cta">Apply for Free Enterprise Access →</a>
-        <a class="btn btn-ghost" href="#products" data-i18n="hero.cta2">Explore the engine</a>
+        <a class="btn btn-primary" href="docs.html" data-i18n="hero.cta">Read the product manual →</a>
+        <a class="btn btn-ghost" href="https://width.info" target="_blank" rel="noopener" data-i18n="hero.cta2">Apply for free access</a>
+      </div>
+
+      <!-- fund-flow graph illustration -->
+      <div class="hero-graph">
+        <svg viewBox="0 0 800 470" role="img" aria-label="Fund-flow graph: a screened address surrounded by labeled counterparties">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#93a3bc"/>
+            </marker>
+            <marker id="arr-faint" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#6b7c96"/>
+            </marker>
+          </defs>
+
+          <!-- hop rings -->
+          <circle cx="400" cy="250" r="118" fill="none" stroke="rgba(148,163,184,0.16)" stroke-dasharray="3 6"/>
+          <circle cx="400" cy="250" r="225" fill="none" stroke="rgba(148,163,184,0.10)" stroke-dasharray="3 6"/>
+          <text x="566" y="40" font-size="11" fill="#6b7c96" font-family="ui-monospace,Menlo,monospace">2+ hops · 间接关联</text>
+          <text x="566" y="54" font-size="11" fill="#6b7c96" font-family="ui-monospace,Menlo,monospace">1 hop · 直接对手方</text>
+
+          <!-- edges: center -> 1-hop -->
+          <line x1="400" y1="250" x2="400" y2="158" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <line x1="400" y1="250" x2="362" y2="250" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <line x1="400" y1="250" x2="438" y2="250" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <line x1="400" y1="250" x2="315" y2="307" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <line x1="400" y1="250" x2="485" y2="307" stroke="#93a3bc" stroke-width="1.4" marker-end="url(#arr)"/>
+          <!-- 2-hop edge: mixer -> darknet -->
+          <line x1="518" y1="224" x2="595" y2="163" stroke="#6b7c96" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#arr-faint)"/>
+
+          <!-- 2-hop: darknet -->
+          <g>
+            <rect x="520" y="111" width="150" height="52" rx="12" fill="#2a1010" stroke="#f87171" stroke-opacity="0.75" stroke-width="1.6"/>
+            <text x="595" y="133" font-size="13.5" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Darknet</text>
+            <text x="595" y="151" font-size="11" fill="#f87171" text-anchor="middle">暗网 · 2 跳</text>
+          </g>
+
+          <!-- 1-hop: DeFi -->
+          <g>
+            <rect x="330" y="106" width="140" height="52" rx="12" fill="#0e2a22" stroke="#34d399" stroke-opacity="0.7" stroke-width="1.4"/>
+            <text x="400" y="128" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">DeFi</text>
+            <text x="400" y="146" font-size="11" fill="#34d399" text-anchor="middle">协议 · 中性</text>
+          </g>
+
+          <!-- 1-hop: CEX -->
+          <g>
+            <rect x="202" y="224" width="160" height="52" rx="12" fill="#0e2233" stroke="#3b82f6" stroke-opacity="0.8" stroke-width="1.4"/>
+            <text x="282" y="246" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">CEX</text>
+            <text x="282" y="264" font-size="11" fill="#3b82f6" text-anchor="middle">交易所 · 免疫</text>
+          </g>
+
+          <!-- 1-hop: Mixer -->
+          <g>
+            <rect x="438" y="224" width="160" height="52" rx="12" fill="#2a1f0e" stroke="#fbbf24" stroke-opacity="0.85" stroke-width="1.4"/>
+            <text x="518" y="246" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Mixer</text>
+            <text x="518" y="264" font-size="11" fill="#fbbf24" text-anchor="middle">混币器 · 高风险</text>
+          </g>
+
+          <!-- 1-hop: Sanctions -->
+          <g>
+            <rect x="235" y="307" width="160" height="52" rx="12" fill="#2a1010" stroke="#f87171" stroke-opacity="0.85" stroke-width="1.4"/>
+            <text x="315" y="329" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Sanctions</text>
+            <text x="315" y="347" font-size="11" fill="#f87171" text-anchor="middle">制裁实体 · critical</text>
+          </g>
+
+          <!-- 1-hop: Hacker -->
+          <g>
+            <rect x="405" y="307" width="160" height="52" rx="12" fill="#2a1010" stroke="#f87171" stroke-opacity="0.85" stroke-width="1.4"/>
+            <text x="485" y="329" font-size="13" font-weight="700" fill="#e7edf7" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">Hacker</text>
+            <text x="485" y="347" font-size="11" fill="#f87171" text-anchor="middle">黑客地址 · critical</text>
+          </g>
+
+          <!-- center: screened address -->
+          <g>
+            <rect x="310" y="224" width="180" height="52" rx="14" fill="#0a1424" stroke="#22d3ee" stroke-width="2.4"/>
+            <text x="400" y="246" font-size="14.5" font-weight="800" fill="#22d3ee" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">0x8a…c21e</text>
+            <text x="400" y="265" font-size="11" fill="#93a3bc" text-anchor="middle">被筛地址 · Screened</text>
+          </g>
+
+          <!-- score chip -->
+          <g>
+            <rect x="12" y="40" width="168" height="58" rx="12" fill="#2a1010" stroke="#f87171" stroke-width="1.6"/>
+            <text x="96" y="62" font-size="12" fill="#f87171" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">风险分数 82 / 100</text>
+            <text x="96" y="84" font-size="13.5" font-weight="800" fill="#f87171" text-anchor="middle">处置:拦截 BLOCK</text>
+          </g>
+
+          <!-- legend -->
+          <g font-size="11.5" fill="#93a3bc">
+            <circle cx="40" cy="432" r="5" fill="#f87171"/><text x="54" y="436">高风险标签</text>
+            <circle cx="150" cy="432" r="5" fill="#fbbf24"/><text x="164" y="436">混淆服务</text>
+            <circle cx="262" cy="432" r="5" fill="#3b82f6"/><text x="276" y="436">合规交易所</text>
+            <text x="400" y="436" text-anchor="middle" fill="#6b7c96">← 资金链路 · 每一跳对手方标签 ←</text>
+          </g>
+        </svg>
+        <p class="hero-graph-caption" data-i18n="graph.caption">One address, one fund-flow graph: who each counterparty is, which chain is risky, and how many points it costs — every hop explainable.</p>
       </div>
     </div>
   </section>
@@ -67,115 +163,163 @@
     </div>
   </section>
 
-  <!-- ============ PRODUCTS ============ -->
-  <section class="section" id="products">
+  <!-- ============ HOW A SCREENING RUNS ============ -->
+  <section class="section" id="how">
     <div class="container">
-      <h2 class="section-title" data-i18n="products.title">One engine, four capabilities</h2>
-      <p class="section-sub" data-i18n="products.sub">Everything a compliance team needs to screen crypto flows — built on our own data, our own labels, our own rules.</p>
+      <h2 class="section-title" data-i18n="pl.title">How a screening runs</h2>
+      <p class="section-sub" data-i18n="pl.sub">One screening is completed by two independent rulesets: the path-matching ruleset decides “what counts as a violation”, the scoring ruleset decides “how severe it is and what to do”.</p>
+      <div class="pipeline">
+        <div class="pl-step">
+          <div class="pl-num">INPUT</div>
+          <h3 data-i18n="pl.s1t">Address / TX hash</h3>
+          <p data-i18n="pl.s1b">Submit an address (KYA) or a transaction (KYT). Chain and token are auto-detected.</p>
+        </div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-step">
+          <div class="pl-num">STEP 01</div>
+          <h3 data-i18n="pl.s2t">Path investigation</h3>
+          <p data-i18n="pl.s2b">Expand the fund-flow graph hop by hop — upstream and downstream — with a label on every counterparty.</p>
+        </div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-step">
+          <div class="pl-num">STEP 02</div>
+          <h3 data-i18n="pl.s3t">Path-matching ruleset</h3>
+          <p data-i18n="pl.s3b">Every path is matched against 72 rules: which fund-flow chains count as risky — and which rule was violated.</p>
+        </div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-step">
+          <div class="pl-num">STEP 03</div>
+          <h3 data-i18n="pl.s4t">Scoring ruleset</h3>
+          <p data-i18n="pl.s4b">Hits are converted into a 0–100 score by direction, hop distance, severity and share of funds.</p>
+        </div>
+        <div class="pl-arrow">→</div>
+        <div class="pl-step pl-out">
+          <div class="pl-num">OUTPUT</div>
+          <h3 data-i18n="pl.outt">Score + disposition</h3>
+          <p data-i18n="pl.outb">Pass · Review · Enhanced Due Diligence · Block — with the exact rules behind the number.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TWO RULESETS ============ -->
+  <section class="section section-alt" id="rulesets">
+    <div class="container">
+      <h2 class="section-title" data-i18n="rs.title">Two rulesets, one screening</h2>
+      <p class="section-sub" data-i18n="rs.sub">You bring the definitions: which fund-flow chains are risky, and how many points each should cost. DART ships 72 built-in rules per ruleset, fully customizable.</p>
+      <div class="split">
+        <div class="rs-card">
+          <span class="rs-tag" data-i18n="rs.at">PATH-MATCHING · KYA / KYT-IN / KYT-OUT</span>
+          <h3 data-i18n="rs.atitle">“Is this fund-flow chain a violation?”</h3>
+          <ul>
+            <li data-i18n="rs.a1">72 rules per ruleset across 9 risk categories — sanctions, terrorism financing, mixers, hacks, darknet and more.</li>
+            <li data-i18n="rs.a2">Three rule shapes: self-hit (0 hop) · direct exposure (1 hop) · layered exposure (2–5 hops, with rising materiality thresholds).</li>
+            <li data-i18n="rs.a3">Input: fund-flow graph + node labels. Output: a hit list — rule, severity, hop, amount.</li>
+            <li data-i18n="rs.a4">Copy a built-in ruleset and edit any threshold or condition.</li>
+          </ul>
+        </div>
+        <div class="rs-card">
+          <span class="rs-tag" data-i18n="rs.bt">SCORING · FUND-ATTRIBUTION</span>
+          <h3 data-i18n="rs.btitle">“How severe is it — and what should we do?”</h3>
+          <ul>
+            <li data-i18n="rs.b1">A contribution matrix over direction × hop distance × hit severity — inflow vs outflow weighted differently.</li>
+            <li data-i18n="rs.b2">Cell score = base × severity weight × share of the address's total on-chain flow (not the sub-graph).</li>
+            <li data-i18n="rs.b3">Total capped at 100, mapped to four dispositions: Pass · Review · EDD · Block.</li>
+            <li data-i18n="rs.b4">Self-hit rules override everything: score 100 × severity weight → Block.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="key-note">
+        <span class="key-note-tag" data-i18n="rs.keytag">KEY DIFFERENCE</span>
+        <p data-i18n="rs.keybody">The path-matching ruleset only answers yes/no — it never produces a score. The score comes entirely from the scoring ruleset. So the same hit list scores differently under a different scoring ruleset, while the hits themselves never change.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCORING TIERS ============ -->
+  <section class="section" id="scoring">
+    <div class="container">
+      <h2 class="section-title" data-i18n="tiers.title">One score, four dispositions</h2>
+      <p class="section-sub" data-i18n="tiers.sub">Every screening ends in a 0–100 score and one of four dispositions — with the exact rules that produced it, ready for your audit trail.</p>
+      <div class="tiers">
+        <div class="tier tier-pass">
+          <div class="tier-score">0–19</div>
+          <div class="tier-verdict" data-i18n="tiers.t1">Pass · 通过</div>
+          <p data-i18n="tiers.b1">No risk exposure found that needs action.</p>
+        </div>
+        <div class="tier tier-review">
+          <div class="tier-score">20–49</div>
+          <div class="tier-verdict" data-i18n="tiers.t2">Review · 复核</div>
+          <p data-i18n="tiers.b2">Risk linkage exists — manual review advised.</p>
+        </div>
+        <div class="tier tier-edd">
+          <div class="tier-score">50–79</div>
+          <div class="tier-verdict" data-i18n="tiers.t3">EDD · 加强尽调</div>
+          <p data-i18n="tiers.b3">Significant risk — enhanced due diligence required.</p>
+        </div>
+        <div class="tier tier-block">
+          <div class="tier-score">80–100</div>
+          <div class="tier-verdict" data-i18n="tiers.t4">Block · 拦截</div>
+          <p data-i18n="tiers.b4">Extreme risk — refuse the transaction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAPABILITIES ============ -->
+  <section class="section section-alt" id="caps">
+    <div class="container">
+      <h2 class="section-title" data-i18n="caps.title">One engine, four capabilities</h2>
+      <p class="section-sub" data-i18n="caps.sub">Everything a compliance team needs to screen crypto flows — built on our own data, our own labels, our own rules.</p>
       <div class="cards">
         <div class="card">
           <div class="card-icon">◈</div>
-          <h3 data-i18n="products.kya.title">KYA · Address Screening</h3>
-          <p data-i18n="products.kya.body">Screen any address for direct hits and indirect exposure across 0–5 hops — sanctions, terrorism financing, mixers, hacks, darknet and more. Materiality thresholds are fully configurable.</p>
+          <h3 data-i18n="caps.kya.t">KYA · Address Screening</h3>
+          <p data-i18n="caps.kya.b">Screen any address for direct hits and indirect exposure across 0–5 hops — sanctions, terrorism financing, mixers, hacks, darknet and more. Materiality thresholds are fully configurable.</p>
         </div>
         <div class="card">
           <div class="card-icon">⇄</div>
-          <h3 data-i18n="products.kyt.title">KYT · Transaction Screening</h3>
-          <p data-i18n="products.kyt.body">Direction-aware screening for deposits and withdrawals. Trace the funds behind each transfer back to their source, and block or escalate in real time.</p>
+          <h3 data-i18n="caps.kyt.t">KYT · Transaction Screening</h3>
+          <p data-i18n="caps.kyt.b">Direction-aware screening for deposits and withdrawals. Trace the funds behind each transfer back to their source, and block or escalate in real time.</p>
         </div>
         <div class="card">
           <div class="card-icon">⛨</div>
-          <h3 data-i18n="products.sanctions.title">Sanctions Screening</h3>
-          <p data-i18n="products.sanctions.body">Self-built sanctions database covering OFAC, UN, EU, UK and more — entities, individuals, companies and addresses, searchable in under a second.</p>
+          <h3 data-i18n="caps.san.t">Sanctions Screening</h3>
+          <p data-i18n="caps.san.b">Self-built sanctions database covering OFAC, UN, EU, UK and more — entities, individuals, companies and addresses, searchable in under a second.</p>
         </div>
         <div class="card">
           <div class="card-icon">◎</div>
-          <h3 data-i18n="products.labels.title">Intelligence &amp; Labels</h3>
-          <p data-i18n="products.labels.body">Continuously updated labels for exchanges, DeFi protocols, mixers, hacks and darknet entities — verified by a dedicated intelligence team.</p>
+          <h3 data-i18n="caps.lab.t">Intelligence &amp; Labels</h3>
+          <p data-i18n="caps.lab.b">Continuously updated labels for exchanges, DeFi protocols, mixers, hacks and darknet entities — verified by a dedicated intelligence team.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ HOW IT WORKS ============ -->
-  <section class="section section-alt" id="how">
+  <!-- ============ DOCS ============ -->
+  <section class="section" id="docs">
     <div class="container">
-      <h2 class="section-title" data-i18n="how.title">How it works</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <h3 data-i18n="how.s1.title">Integrate the API</h3>
-          <p data-i18n="how.s1.body">One REST API. Three built-in rulesets — KYA, KYT-IN, KYT-OUT — or bring your own thresholds and rules.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <h3 data-i18n="how.s2.title">Screen in real time</h3>
-          <p data-i18n="how.s2.body">Every address and transfer is checked against sanctions, crime and obfuscation risk — with per-hop materiality controls that keep false positives down.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <h3 data-i18n="how.s3.title">Explainable results</h3>
-          <p data-i18n="how.s3.body">Every hit returns the exact rules triggered — a ready-made audit trail for compliance teams and regulators, supporting MAS PSN02 and FATF Travel Rule scenarios.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ AMLCLAW ============ -->
-  <section class="section" id="amlclaw">
-    <div class="container">
-      <p class="amlclaw-kicker" data-i18n="amlclaw.kicker">OPEN SOURCE · MIT · SELF-HOSTED</p>
-      <h2 class="section-title" data-i18n="amlclaw.title">AMLClaw — the open-source app built on DAIA</h2>
-      <p class="section-sub" data-i18n="amlclaw.sub">A compliance desk open-sourced by the DAIA team. It wraps our KYA / KYT API into ready-to-run payment workflows — screening, monitoring and evidence reports — and shows you how to call the API the right way.</p>
-
-      <div class="cards" style="margin-top:44px">
+      <h2 class="section-title" data-i18n="docs.title">Learn the product in an afternoon</h2>
+      <p class="section-sub" data-i18n="docs.sub">Screenshots, console walkthrough, API samples — everything about the two rulesets, from your first screening to your own scoring matrix.</p>
+      <div class="cards">
         <div class="card">
-          <div class="card-icon">◈</div>
-          <h3 data-i18n="amlclaw.f1.title">KYA / KYT screening</h3>
-          <p data-i18n="amlclaw.f1.body">Screen an address or a transaction hash in one click — direction-aware, with full path evidence and an interactive fund-flow graph.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">◎</div>
-          <h3 data-i18n="amlclaw.f2.title">Address monitoring</h3>
-          <p data-i18n="amlclaw.f2.body">Watch an address's future transfers and auto-KYT every new one — receiving = in, sending = out. Every tx lands in a filterable ledger, nothing missed.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">⛨</div>
-          <h3 data-i18n="amlclaw.f3.title">TX monitoring</h3>
-          <p data-i18n="amlclaw.f3.body">Keep watching a counterparty — a tx's from / to address — and alert the moment it gets tagged Sanctions or Freeze, or its risk level escalates.</p>
+          <div class="card-icon">📘</div>
+          <h3 data-i18n="docs.f1.t">DART Product Manual</h3>
+          <p data-i18n="docs.f1.b">The two rulesets explained end to end: how a screening runs, all 72 rule categories, the scoring matrix and formulas, console + API usage with screenshots.</p>
+          <a class="btn btn-primary btn-small card-cta" href="docs.html" data-i18n="docs.cta1">Read the manual →</a>
         </div>
         <div class="card">
           <div class="card-icon">⌘</div>
-          <h3 data-i18n="amlclaw.f4.title">Self-hosted & free</h3>
-          <p data-i18n="amlclaw.f4.body">MIT-licensed, no database, your data never leaves your server. Bring one width.info API key and deploy anywhere.</p>
+          <h3 data-i18n="docs.f2.t">API Reference</h3>
+          <p data-i18n="docs.f2.b">KYA / KYT endpoints, ruleset_id and scoring_ruleset_id parameters, sync and async modes, and the result schema — testable right in the browser.</p>
+          <a class="btn btn-ghost btn-small card-cta" href="https://width.info/api-reference" target="_blank" rel="noopener" data-i18n="docs.cta2">Open API reference</a>
         </div>
-      </div>
-
-      <div class="practice">
-        <h3 class="practice-title" data-i18n="amlclaw.bp.title">How to use the API well — lessons baked into AMLClaw</h3>
-        <div class="practice-list">
-          <div class="practice-item">
-            <span class="practice-tag">hops = 1</span>
-            <p data-i18n="amlclaw.bp1.body">For continuous TX monitoring, set hops = 1. You only need to know whether the counterparty (from / to) address itself carries a high-risk label — Sanctions, Freeze and the like. One hop skips the deep graph walk, so each cycle returns in a fraction of the time — exactly what high-frequency monitoring needs.</p>
-          </div>
-          <div class="practice-item">
-            <span class="practice-tag" data-i18n="amlclaw.bp2.tag">custom ruleset</span>
-            <p data-i18n="amlclaw.bp2.body">Don't leave ruleset_id at the broad default. Point each monitor at your own ruleset — pick the categories and thresholds that match your business — and alerts get far more precise, with fewer false positives.</p>
-          </div>
-          <div class="practice-item">
-            <span class="practice-tag" data-i18n="amlclaw.bp3.tag">deep KYA on demand</span>
-            <p data-i18n="amlclaw.bp3.body">Reserve multi-hop (3–5) for one-off deposit / withdrawal screening, where you genuinely need to trace source of funds. Keep deep hops out of the monitoring loop — depth there just costs latency.</p>
-          </div>
-          <div class="practice-item">
-            <span class="practice-tag" data-i18n="amlclaw.bp4.tag">rolling window · serial</span>
-            <p data-i18n="amlclaw.bp4.body">Each cycle screens only [last run → now], never from zero — faster, no re-scanning. Run jobs one after another to respect API concurrency limits, and log every tx so you can prove full coverage.</p>
-          </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3 data-i18n="docs.f3.t">AMLClaw — open-source app</h3>
+          <p data-i18n="docs.f3.b">A ready-to-run compliance desk built on DART's API — screening, address/TX monitoring and evidence reports — and a working example of how to call the API well.</p>
+          <a class="btn btn-ghost btn-small card-cta" href="https://github.com/amlclaw/amlclaw.com" target="_blank" rel="noopener" data-i18n="docs.cta3">View on GitHub</a>
         </div>
-      </div>
-
-      <div class="amlclaw-actions">
-        <a class="btn btn-primary" href="https://github.com/amlclaw/amlclaw.com" target="_blank" rel="noopener" data-i18n="amlclaw.cta">View AMLClaw on GitHub →</a>
-        <a class="btn btn-ghost" href="https://width.info/api-reference" target="_blank" rel="noopener" data-i18n="amlclaw.cta2">Read the API reference</a>
       </div>
     </div>
   </section>
@@ -184,7 +328,7 @@
   <section class="section section-alt" id="free">
     <div class="container free-box">
       <h2 class="free-title" data-i18n="free.title">Free for enterprise partners</h2>
-      <p class="free-body" data-i18n="free.body">We provide wallets, custodians, payment companies and trading platforms with free, SLA-backed access to the full DAIA engine — on-chain intelligence, screening and sanctions data included.</p>
+      <p class="free-body" data-i18n="free.body">We provide wallets, custodians, payment companies and trading platforms with free, SLA-backed access to the full DART engine — address labels, fund-flow tracing, risk rulesets and scoring included.</p>
       <a class="btn btn-primary btn-lg" href="https://width.info" target="_blank" rel="noopener" data-i18n="free.cta">Talk to us at width.info →</a>
     </div>
   </section>
@@ -193,9 +337,13 @@
 
 <footer class="footer">
   <div class="container footer-inner">
-    <span>© 2026 DAIA</span>
+    <span>© 2026 DART</span>
+    <span class="footer-sep">·</span>
+    <span data-i18n="footer.name">Digital Asset Risk Targeting</span>
     <span class="footer-sep">·</span>
     <a href="https://width.info" target="_blank" rel="noopener" data-i18n="footer.by">by Width</a>
+    <span class="footer-sep">·</span>
+    <a href="docs.html" data-i18n="footer.docs">Product manual</a>
   </div>
 </footer>
 

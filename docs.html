@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DART 产品使用手册 · Product Manual</title>
+<meta name="description" content="DART 产品使用手册:两套规则集(路径匹配 + 打分映射)、筛查流程、控制台与 API 使用、注意事项。DART Product Manual: the two rulesets, how a screening runs, console & API usage.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0f1e'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%2322d3ee' font-family='Arial' font-weight='bold'>D</text></svg>">
+<style>
+:root{
+  --bg:#0a0f1e; --bg-alt:#0d1526; --panel:#111a30; --panel-2:#0e1729;
+  --border:rgba(148,163,184,.14); --border-strong:rgba(148,163,184,.26);
+  --text:#e7edf7; --muted:#93a3bc; --muted-2:#6b7c96;
+  --accent:#22d3ee; --accent-2:#3b82f6;
+  --green:#34d399; --amber:#fbbf24; --red:#f87171; --violet:#a78bfa;
+  --radius:14px; --mono:ui-monospace,SFMono-Regular,Menlo,"Roboto Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);line-height:1.7;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent);text-decoration:none}
+.wrap{display:grid;grid-template-columns:250px 1fr;max-width:1240px;margin:0 auto;gap:0}
+
+/* ===== Top bar ===== */
+.topbar{
+  position:sticky;top:0;z-index:60;background:rgba(10,15,30,.9);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-in{max-width:1240px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;gap:18px}
+.topbar .brand{font-size:19px;font-weight:800;letter-spacing:.5px;color:var(--text)}
+.topbar .brand span{color:var(--accent)}
+.topbar .crumb{color:var(--muted-2);font-size:12.5px}
+.topbar .crumb a{color:var(--muted-2)}
+.topbar .crumb a:hover{color:var(--accent)}
+.topbar .spacer{flex:1}
+.lang-toggle{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.lang-btn{background:transparent;color:var(--muted);border:0;padding:5px 11px;font-size:13px;cursor:pointer;transition:.15s}
+.lang-btn.active{background:var(--accent);color:#06202a;font-weight:700}
+.print-btn{background:transparent;border:1px solid var(--border-strong);color:var(--muted);padding:7px 12px;border-radius:8px;font-size:12.5px;cursor:pointer;transition:.15s}
+.print-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== Sidebar ===== */
+.side{
+  position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;padding:26px 18px 40px;
+  border-right:1px solid var(--border);background:rgba(10,15,30,.6);
+}
+.side .side-title{font-size:11.5px;color:var(--muted-2);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding:0 12px}
+.toc a{display:flex;gap:10px;align-items:baseline;color:var(--muted);font-size:13.5px;padding:7px 12px;border-radius:8px;border-left:2px solid transparent;transition:.15s}
+.toc a:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.toc a.active{color:var(--accent);border-left-color:var(--accent);background:rgba(34,211,238,.06)}
+.toc .num{color:var(--muted-2);font-family:var(--mono);font-size:11px;flex-shrink:0}
+.toc .side-print{margin-top:24px;width:100%;background:transparent;border:1px solid var(--border-strong);color:var(--muted);padding:9px;border-radius:9px;font-size:12.5px;cursor:pointer;transition:.15s}
+.toc .side-print:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== Main ===== */
+.main{padding:40px 54px 100px;min-width:0}
+.kicker{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+h1{font-size:36px;font-weight:800;letter-spacing:-.5px;margin:12px 0 10px;line-height:1.25}
+.lede{color:var(--muted);font-size:16.5px;max-width:820px}
+.meta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.chip{font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:5px 13px}
+.chip b{color:var(--text)}
+.footnote{font-size:12.5px;color:var(--muted-2);margin-top:14px}
+
+section{padding-top:54px;scroll-margin-top:76px}
+h2{font-size:26px;font-weight:800;letter-spacing:-.3px;margin-bottom:6px;display:flex;align-items:baseline;gap:12px}
+h2 .h-num{font-family:var(--mono);font-size:15px;color:var(--accent);font-weight:700}
+.sec-sub{color:var(--muted);font-size:15px;margin-bottom:20px;max-width:840px}
+h3{font-size:17px;font-weight:700;margin:24px 0 8px}
+p{color:var(--muted);font-size:14.8px;margin-bottom:10px}
+p strong,li strong{color:var(--text)}
+ul{margin:6px 0 12px 4px;list-style:none}
+li{color:var(--muted);font-size:14.8px;padding-left:20px;position:relative;margin-bottom:7px}
+li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-size:12px;top:2px}
+
+/* numbered lists */
+ol.nums{counter-reset:n;list-style:none;margin:8px 0 16px}
+ol.nums li{counter-increment:n;position:relative;padding-left:28px;margin-bottom:8px;color:var(--muted);font-size:14.5px}
+ol.nums li::before{
+  content:counter(n);position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:5px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#06121f;font-weight:800;
+  font-size:11px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+}
+ol.nums li b{color:var(--text)}
+
+/* screenshots */
+.shot{width:100%;border:1px solid var(--border);border-radius:12px;margin:16px 0 6px;background:var(--panel)}
+.shot-cap{font-size:12.5px;color:var(--muted-2);margin-bottom:18px;text-align:center}
+
+/* code / flow */
+pre{
+  background:var(--panel-2);border:1px solid var(--border);border-radius:12px;
+  padding:18px 20px;overflow-x:auto;margin:12px 0 18px;
+  font-family:var(--mono);font-size:13px;line-height:1.65;color:#c8d6ec;
+  white-space:pre;
+}
+pre .cm{color:#5f7188}
+code{font-family:var(--mono);font-size:.9em;background:rgba(148,163,184,.14);padding:1px 6px;border-radius:5px;color:var(--accent)}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;margin:10px 0 20px;font-size:13.8px;overflow:hidden;border-radius:12px;border:1px solid var(--border)}
+.tbl th,.tbl td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+.tbl th{background:var(--panel-2);color:var(--text);font-weight:700;font-size:12.5px}
+.tbl td{color:var(--muted)}
+.tbl td:first-child,.tbl td.k{color:var(--text);font-weight:600;white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .mono{font-family:var(--mono);font-size:12.5px}
+.tbl .num{font-family:var(--mono);text-align:center;color:var(--text)}
+
+/* notes */
+.note{border-radius:12px;padding:15px 18px;font-size:14px;margin:14px 0;border:1px solid}
+.note p{margin:0;color:var(--muted)}
+.note.tip{background:rgba(52,211,153,.07);border-color:rgba(52,211,153,.28)}
+.note.tip b{color:var(--green)}
+.note.warn{background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.28)}
+.note.warn b{color:var(--amber)}
+.note.key{background:rgba(167,139,250,.07);border-color:rgba(167,139,250,.28)}
+.note.key b{color:var(--violet)}
+
+.foot{margin-top:70px;padding-top:24px;border-top:1px solid var(--border);color:var(--muted-2);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media(max-width:960px){
+  .wrap{grid-template-columns:1fr}
+  .side{display:none}
+  .main{padding:30px 22px 70px}
+  h1{font-size:28px}
+  .topbar .crumb{display:none}
+}
+@media print{
+  .topbar,.side{display:none}
+  body{background:#fff;color:#111}
+  .wrap{grid-template-columns:1fr}
+  section{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html">DART<span>.</span></a>
+    <span class="crumb"><a href="index.html" data-lang="en">Home</a><a href="index.html" data-lang="zh">首页</a> · <span data-lang="en">Product Manual</span><span data-lang="zh">产品使用手册</span></span>
+    <span class="spacer"></span>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中</button>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side">
+    <div class="side-title" data-lang="en">Contents</div>
+    <div class="side-title" data-lang="zh">目录</div>
+    <nav class="toc" id="toc">
+      <a href="#s1"><span class="num">01</span><span data-lang="en">How a screening runs</span><span data-lang="zh">筛查是怎么跑的</span></a>
+      <a href="#s2"><span class="num">02</span><span data-lang="en">The two rulesets</span><span data-lang="zh">两套规则集的分工</span></a>
+      <a href="#s3"><span class="num">03</span><span data-lang="en">Path-matching rulesets</span><span data-lang="zh">路径匹配规则集</span></a>
+      <a href="#s4"><span class="num">04</span><span data-lang="en">Scoring ruleset</span><span data-lang="zh">打分映射规则集</span></a>
+      <a href="#s5"><span class="num">05</span><span data-lang="en">Using the console</span><span data-lang="zh">控制台使用方式</span></a>
+      <a href="#s6"><span class="num">06</span><span data-lang="en">Using the API</span><span data-lang="zh">API 使用方式</span></a>
+      <a href="#s7"><span class="num">07</span><span data-lang="en">Notes &amp; gotchas</span><span data-lang="zh">使用注意事项</span></a>
+    </nav>
+    <button class="side-print" onclick="window.print()">🖨 <span data-lang="en">Print / Save as PDF</span><span data-lang="zh">打印 / 存为 PDF</span></button>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <header>
+      <p class="kicker" data-lang="en">PRODUCT MANUAL · v1.3</p>
+      <p class="kicker" data-lang="zh">产品使用手册 · v1.3</p>
+      <h1 data-lang="en">DART Product Manual</h1>
+      <h1 data-lang="zh">DART 产品使用手册</h1>
+      <p class="lede" data-lang="en">Two rulesets, one screening: the <strong>path-matching ruleset</strong> decides “what counts as a violation”, the <strong>scoring ruleset</strong> decides “how severe it is and what to do”. This manual explains both rulesets end to end — how they are built, how they are calculated, and how to use them in the console and the API.</p>
+      <p class="lede" data-lang="zh">两套彼此独立的规则集完成一次合规筛查：<strong>路径匹配规则集</strong>判定「什么算违规」，<strong>打分映射规则集</strong>判定「有多严重、该怎么处置」。本手册说明这两套规则集的构成与算法，以及在控制台和 API 上的完整使用方式。</p>
+      <div class="meta-row">
+        <span class="chip"><b data-lang="en">Version</b><b data-lang="zh">适用版本</b> v1.3</span>
+        <span class="chip"><b data-lang="en">Built-in rules</b><b data-lang="zh">内置规则</b> 72 / ruleset</span>
+        <span class="chip"><b data-lang="en">Types</b><b data-lang="zh">规则集类型</b> KYA · KYT-IN · KYT-OUT · Scoring</span>
+        <span class="chip"><b data-lang="en">Updated</b><b data-lang="zh">整理日期</b> 2026-08-17</span>
+      </div>
+      <p class="footnote"><span data-lang="en">Screenshots are from the AML console v2 — the DART console ships the same screens.</span><span data-lang="zh">截图来自 AML 控制台 v2 —— DART 控制台为相同界面。</span></p>
+    </header>
+
+    <!-- 01 -->
+    <section id="s1">
+      <h2><span class="h-num">01</span><span data-lang="en">How a screening runs</span><span data-lang="zh">筛查是怎么跑的</span></h2>
+      <p class="sec-sub" data-lang="en">The big picture first: the steps a screening goes through, and where each ruleset plugs in.</p>
+      <p class="sec-sub" data-lang="zh">先建立整体印象：一次筛查经过哪几步，两套规则集分别插在哪里。</p>
+      <p data-lang="en">You submit an address (KYA) or a transaction (KYT). The system runs a <strong>path investigation</strong> against the on-chain data layer, tracing the address's funds upstream and downstream for several hops to produce a fund-flow graph. Then the two rulesets take over in sequence: the <strong>path-matching ruleset</strong> finds every violation on this graph, and the <strong>scoring ruleset</strong> converts those hits into a 0–100 score and a disposition.</p>
+      <p data-lang="zh">你提交一个地址（KYA）或一笔交易（KYT）。系统先向链上数据层发起一次<strong>路径调查</strong>，把这个地址的资金往上游、下游各追若干跳，得到一张资金流图。随后两套规则集依次介入：路径匹配规则集在这张图上找出所有违规命中，打分映射规则集把这些命中折算成一个 0–100 的分数和一个处置判定。</p>
+
+      <pre data-lang="en">Input               Step 1               Ruleset A            Ruleset B           Output
+Address / TX hash → Path investigation  → Path matching     → Scoring mapping   → Score + verdict
+Ethereum / Tron     Expand hop-by-hop     Match each path     Direction × hops    Pass / Review /
+USDT / USDC         fund-flow graph +     against rules,      × severity ×       EDD / Block
+                    counterparty labels   produce hit list    share of funds</pre>
+      <pre data-lang="zh">输入                第一步              规则集 A            规则集 B            输出
+地址 / 交易哈希  →   路径调查        →   路径匹配        →   打分映射        →   分数 + 判定
+Ethereum/Tron       按跳数展开          逐条路径匹配        按方向、跳数、       通过 / 复核 /
+USDT/USDC           资金流图 +          规则,产出           严重度、资金占比     加强尽调 / 拦截
+                    对手方标签          命中列表            折算成分数</pre>
+
+      <div class="note key"><p><b data-lang="en">KEY DIFFERENCE — </b><span data-lang="en">The path-matching ruleset only answers <strong>yes / no</strong> — does this path violate a rule? It never produces a score. The score comes entirely from the scoring ruleset. So the same hit list produces different scores and dispositions under a different scoring ruleset — while the hit list itself never changes.</span><b data-lang="zh">关键区别 —— </b><span data-lang="zh">路径匹配规则集只回答<strong>是/否</strong>——这条路径有没有违规。它不产生分数。分数完全由打分映射规则集决定。所以同一批命中，换一套打分规则集就会得到不同的分数和判定，而命中列表本身不变。</span></p></div>
+    </section>
+
+    <!-- 02 -->
+    <section id="s2">
+      <h2><span class="h-num">02</span><span data-lang="en">The two rulesets at a glance</span><span data-lang="zh">两套规则集的分工</span></h2>
+      <p class="sec-sub" data-lang="en">On the “Rulesets” page, four cards correspond to the two kinds of rulesets.</p>
+      <p class="sec-sub" data-lang="zh">在「规则集」页面，四张卡片对应两类规则集。</p>
+
+      <img class="shot" src="docs/images/01-rulesets.png" alt="Rulesets page" loading="lazy">
+      <p class="shot-cap" data-lang="en">Compliance rulesets page: left — the Rulesets entry; KYA / KYT-IN / KYT-OUT — path-matching rulesets; Scoring — the scoring ruleset; the rule count opens the full rule list.</p>
+      <p class="shot-cap" data-lang="zh">合规规则集页面：左侧「规则集」入口；KYA / KYT-IN / KYT-OUT —— 路径匹配类；评分 —— 打分映射类；规则条数，点进去查看该规则集下的全部规则。</p>
+
+      <ol class="nums">
+        <li data-lang="en">Left — the “Rulesets” entry</li>
+        <li data-lang="zh">左侧「规则集」入口</li>
+        <li data-lang="en"><b>KYA</b> — address screening, path-matching type</li>
+        <li data-lang="zh"><b>KYA</b> —— 地址筛查，路径匹配类</li>
+        <li data-lang="en"><b>KYT-IN</b> — transaction inflow side (source of funds), path-matching type</li>
+        <li data-lang="zh"><b>KYT-IN</b> —— 交易流入侧（资金来源），路径匹配类</li>
+        <li data-lang="en"><b>KYT-OUT</b> — transaction outflow side (destination of funds), path-matching type</li>
+        <li data-lang="zh"><b>KYT-OUT</b> —— 交易流出侧（资金去向），路径匹配类</li>
+        <li data-lang="en"><b>Scoring</b> — fund-attribution scoring, scoring-mapping type</li>
+        <li data-lang="zh"><b>评分</b> —— 资金占比评分，打分映射类</li>
+        <li data-lang="en">Rule count — click through to see all rules under that ruleset</li>
+        <li data-lang="zh">规则条数，点进去查看该规则集下的全部规则</li>
+      </ol>
+
+      <p data-lang="en">The first three cards are the same kind of thing (path-matching); the fourth is a different kind (scoring-mapping).</p>
+      <p data-lang="zh">前三张卡片是同一类东西（路径匹配），第四张是另一类（打分映射）。</p>
+
+      <table class="tbl">
+        <tr><th></th><th><span data-lang="en">Path-matching ruleset</span><span data-lang="zh">路径匹配规则集</span></th><th><span data-lang="en">Scoring ruleset</span><span data-lang="zh">打分映射规则集</span></th></tr>
+        <tr><td class="k"><span data-lang="en">Type</span><span data-lang="zh">类型标识</span></td><td class="mono">kya / kyt_in / kyt_out</td><td class="mono">scoring</td></tr>
+        <tr><td class="k"><span data-lang="en">Question it answers</span><span data-lang="zh">回答的问题</span></td><td><span data-lang="en">Does this path violate a rule? Which one?</span><span data-lang="zh">这条路径违规吗？违反哪条？</span></td><td><span data-lang="en">How severe is it overall? What should we do?</span><span data-lang="zh">整体有多严重？该怎么处置？</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Input</span><span data-lang="zh">输入</span></td><td><span data-lang="en">Fund-flow graph + label of every node</span><span data-lang="zh">资金流图 + 每个节点的标签</span></td><td><span data-lang="en">Hit list from the previous step + address total on-chain flow</span><span data-lang="zh">上一步产出的命中列表 + 地址链上总流量</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Output</span><span data-lang="zh">输出</span></td><td><span data-lang="en">Hit list — rule, severity, hop, amount</span><span data-lang="zh">命中列表（规则、严重度、跳数、金额）</span></td><td><span data-lang="en">0–100 score + disposition tier</span><span data-lang="zh">0–100 分数 + 判定档位</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Contents</span><span data-lang="zh">内容形态</span></td><td><span data-lang="en">72 rules, each with a condition expression</span><span data-lang="zh">72 条规则，每条含条件表达式</span></td><td><span data-lang="en">A contribution matrix + weights + tier thresholds</span><span data-lang="zh">一张贡献矩阵 + 权重 + 档位阈值</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Built-in version</span><span data-lang="zh">内置版本</span></td><td><span data-lang="en">AML KYA / KYT-IN / KYT-OUT Default v1.3</span><span data-lang="zh">AML KYA / KYT-IN / KYT-OUT Default v1.3</span></td><td><span data-lang="en">AML Fund-Attribution Scoring Default v1.0</span><span data-lang="zh">AML Fund-Attribution Scoring Default v1.0</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Used per screening</span><span data-lang="zh">每次筛查用几套</span></td><td><span data-lang="en">1 (auto-matched by KYA / KYT and direction)</span><span data-lang="zh">1 套（按 KYA/KYT 及方向自动匹配）</span></td><td><span data-lang="en">1</span><span data-lang="zh">1 套</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Customizable</span><span data-lang="zh">可否自定义</span></td><td><span data-lang="en">Copy a built-in ruleset, then edit</span><span data-lang="zh">可复制内置规则集后修改</span></td><td><span data-lang="en">Copy, then adjust matrix and thresholds</span><span data-lang="zh">可复制后调整矩阵与阈值</span></td></tr>
+      </table>
+    </section>
+
+    <!-- 03 -->
+    <section id="s3">
+      <h2><span class="h-num">03</span><span data-lang="en">Path-matching rulesets</span><span data-lang="zh">路径匹配规则集</span></h2>
+      <p class="sec-sub" data-lang="en">How the 72 rules are organized, and what a single rule is made of.</p>
+      <p class="sec-sub" data-lang="zh">72 条规则如何组织，以及一条规则由什么构成。</p>
+
+      <img class="shot" src="docs/images/02-rules.png" alt="Rules list" loading="lazy">
+      <p class="shot-cap" data-lang="en">Rule list: code (unique id, echoed verbatim in results) · category (risk class) · risk (severity, converted to a weight when scoring) · action (suggested disposition) · direction (inflow / outflow / both).</p>
+      <p class="shot-cap" data-lang="zh">规则列表：代码（唯一标识，命中后原样出现在结果里）· 分类（风险类别）· 风险（严重度，打分时换算成权重）· 操作（建议处置动作）· 方向（对流入侧、流出侧还是双向生效）。</p>
+
+      <ol class="nums">
+        <li data-lang="en"><b>Code</b> — unique rule id, echoed verbatim in results</li>
+        <li data-lang="zh"><b>代码</b> —— 规则唯一标识，命中后原样出现在结果里</li>
+        <li data-lang="en"><b>Category</b> — risk class that decides which scenario it belongs to</li>
+        <li data-lang="zh"><b>分类</b> —— 风险类别，决定它属于哪个场景</li>
+        <li data-lang="en"><b>Risk</b> — severity, converted to a weight when scoring</li>
+        <li data-lang="zh"><b>风险</b> —— 严重度，打分时换算成权重</li>
+        <li data-lang="en"><b>Action</b> — suggested disposition</li>
+        <li data-lang="zh"><b>操作</b> —— 建议处置动作</li>
+        <li data-lang="en"><b>Direction</b> — applies to inflow, outflow or both</li>
+        <li data-lang="zh"><b>方向</b> —— 对流入侧、流出侧还是双向生效</li>
+        <li data-lang="en">Built-in rulesets are read-only — copy one before editing</li>
+        <li data-lang="zh">内置规则集为只读，如需修改请先复制一份</li>
+      </ol>
+      <p data-lang="en">The five rules in the screenshot are all “self-hit” rules: the address itself carries sanctions, terrorism-financing, law-enforcement-freeze and similar labels.</p>
+      <p data-lang="zh">图中五条都是「自身命中」型规则：地址自己带了制裁、恐怖融资、执法冻结等标签。</p>
+
+      <h3 data-lang="en">What a rule is made of</h3>
+      <h3 data-lang="zh">一条规则由什么构成</h3>
+      <p data-lang="en">Each rule is a set of conditions plus a scope. Real built-in rules (from production) look like this:</p>
+      <p data-lang="zh">每条规则是一组条件，加上生效范围。真实的内置规则（取自生产库）长这样：</p>
+      <pre><span class="cm">// 自身命中:地址自己就是制裁实体。跳数 0,max_hops = -1 表示「只看地址本身」
+// Self-hit: the address itself is a sanctions entity. 0 hops, max_hops = -1 = "the address only"</span>
+KYA_SANCTION_SELFHIT      critical / block / 0..-1
+  [{ "parameter": "primary_category", "operator": "==", "value": "Sanctions" }]
+
+<span class="cm">// 直接暴露:一跳之内的对手方是制裁实体,且金额 &gt; 10 USD
+// Direct exposure: a counterparty within 1 hop is a sanctions entity, amount &gt; 10 USD</span>
+KYA_SANCTION_EXPOSURE     critical / block / 1..1
+  [{ "parameter": "primary_category", "operator": "==", "value": "Sanctions" },
+   { "parameter": "amount",           "operator": "&gt;",  "value": 10, "unit": "USD" }]
+
+<span class="cm">// 分层暴露:2 跳,且该路径的风险资金占比 &gt;= 5%
+// Layered exposure: 2 hops, and the path's risk funds share &gt;= 5%</span>
+KYA_SANCTION_EXPOSURE_H2  critical / block / 2..2
+  [{ "parameter": "primary_category", "operator": "==", "value": "Sanctions" },
+   { "parameter": "amount",           "operator": "&gt;",  "value": 10, "unit": "USD" },
+   { "parameter": "risk_rate",        "operator": "&gt;=", "value": 5 }]</pre>
+
+      <h3 data-lang="en">The three rule shapes</h3>
+      <h3 data-lang="zh">三种规则形态</h3>
+      <p data-lang="en">The 72 rules are combinations of three shapes. Understand these three and you understand the whole ruleset:</p>
+      <p data-lang="zh">72 条规则由三种形态组合而成，理解这三种就理解了整套规则集：</p>
+      <table class="tbl">
+        <tr><th><span data-lang="en">Shape</span><span data-lang="zh">形态</span></th><th><span data-lang="en">Code suffix</span><span data-lang="zh">代码后缀</span></th><th><span data-lang="en">Hops</span><span data-lang="zh">跳数范围</span></th><th><span data-lang="en">Meaning</span><span data-lang="zh">含义</span></th></tr>
+        <tr><td class="k"><span data-lang="en">Self-hit</span><span data-lang="zh">自身命中</span></td><td class="mono">_SELFHIT</td><td class="num">0 .. -1</td><td><span data-lang="en">The screened address / transaction itself carries the risk label. Strongest signal — triggers the top score directly.</span><span data-lang="zh">被筛地址/交易本身带有该风险标签。最强信号，直接触发最高分。</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Direct exposure</span><span data-lang="zh">直接暴露</span></td><td class="mono">_EXPOSURE</td><td class="num">1 .. 1</td><td><span data-lang="en">A direct counterparty within 1 hop carries the label, and the amount clears the threshold.</span><span data-lang="zh">一跳之内的直接交易对手带有该标签，且金额超过门槛。</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Layered exposure</span><span data-lang="zh">分层暴露</span></td><td class="mono">_EXPOSURE_H2 … _H5</td><td class="num">2..2 … 5..5</td><td><span data-lang="en">Indirect linkage 2–5 hops away. The further the hop, the higher the required <strong>risk-funds share</strong> (≥5% / 10% / 15% / 20%) — distant weak links stay quiet.</span><span data-lang="zh">2–5 跳的间接关联。跳得越远，要求的<strong>风险资金占比</strong>门槛越高（≥5% / 10% / 15% / 20%），避免远距离弱关联造成误报。</span></td></tr>
+      </table>
+
+      <h3 data-lang="en">Risk categories and rule counts</h3>
+      <h3 data-lang="zh">风险类别与规则条数</h3>
+      <p data-lang="en">The 72 built-in KYA rules span 9 categories:</p>
+      <p data-lang="zh">内置 KYA 规则集的 72 条规则分布在 9 个类别：</p>
+      <table class="tbl">
+        <tr><th><span data-lang="en">Risk category</span><span data-lang="zh">风险类别</span></th><th><span data-lang="en">Rules</span><span data-lang="zh">规则数</span></th><th><span data-lang="en">Typical severity</span><span data-lang="zh">典型严重度</span></th></tr>
+        <tr><td class="k">High-Risk Entities <span style="color:var(--muted);font-weight:400">高风险实体</span></td><td class="num">16</td><td class="mono">high</td></tr>
+        <tr><td class="k">Cybercrime <span style="color:var(--muted);font-weight:400">网络犯罪</span></td><td class="num">12</td><td class="mono">high</td></tr>
+        <tr><td class="k">Obfuscation <span style="color:var(--muted);font-weight:400">混淆服务</span></td><td class="num">8</td><td class="mono">high</td></tr>
+        <tr><td class="k">Sanctions <span style="color:var(--muted);font-weight:400">制裁</span></td><td class="num">6</td><td class="mono">critical</td></tr>
+        <tr><td class="k">Terrorism Financing <span style="color:var(--muted);font-weight:400">恐怖融资</span></td><td class="num">6</td><td class="mono">critical</td></tr>
+        <tr><td class="k">Public Freezing Action <span style="color:var(--muted);font-weight:400">执法冻结</span></td><td class="num">6</td><td class="mono">critical</td></tr>
+        <tr><td class="k">Illicit Markets <span style="color:var(--muted);font-weight:400">非法市场</span></td><td class="num">6</td><td class="mono">critical</td></tr>
+        <tr><td class="k">Other Financial Crimes <span style="color:var(--muted);font-weight:400">其他金融犯罪</span></td><td class="num">6</td><td class="mono">critical</td></tr>
+        <tr><td class="k">Gambling <span style="color:var(--muted);font-weight:400">博彩</span></td><td class="num">6</td><td class="mono">medium</td></tr>
+      </table>
+
+      <h3 data-lang="en">KYA vs KYT</h3>
+      <h3 data-lang="zh">KYA 与 KYT 的关系</h3>
+      <p data-lang="en">The three path-matching rulesets are structurally identical — all 72 rules — differing only in what they screen:</p>
+      <p data-lang="zh">三套路径匹配规则集内容同构，都是 72 条，区别只在适用对象：</p>
+      <ul>
+        <li data-lang="en"><b>KYA</b> — screens one address. Traces both its inflow and outflow sides.</li>
+        <li data-lang="zh"><b>KYA</b> —— 筛查一个地址。追它的流入和流出两侧。</li>
+        <li data-lang="en"><b>KYT-IN</b> — screens a transaction's <b>payer</b>: “where did this money come from — is the source clean?”</li>
+        <li data-lang="zh"><b>KYT-IN</b> —— 筛查一笔交易的<b>付款方</b>，回答「这笔钱从哪来，来源干净吗」。</li>
+        <li data-lang="en"><b>KYT-OUT</b> — screens a transaction's <b>payee</b>: “where does this money go — is the destination clean?”</li>
+        <li data-lang="zh"><b>KYT-OUT</b> —— 筛查一笔交易的<b>收款方</b>，回答「这笔钱去哪了，去向干净吗」。</li>
+      </ul>
+      <p data-lang="en">When screening a transaction you can look at one side only, or choose “both” — the system screens both ends separately and merges the results, taking the higher risk level.</p>
+      <p data-lang="zh">筛查交易时可以只看一侧，也可以选「双向」——系统会分别筛两端再合并结果，取两者中较高的风险等级。</p>
+    </section>
+
+    <!-- 04 -->
+    <section id="s4">
+      <h2><span class="h-num">04</span><span data-lang="en">Scoring ruleset</span><span data-lang="zh">打分映射规则集</span></h2>
+      <p class="sec-sub" data-lang="en">Converting the hit list into a 0–100 score, then mapping it to a disposition.</p>
+      <p class="sec-sub" data-lang="zh">把命中列表折算成 0–100 分，再映射成处置判定。</p>
+      <p data-lang="en">This ruleset contains no “rules” — only a set of parameters. At its core is a <strong>contribution matrix</strong>: the maximum contribution of each cell, keyed by “fund direction × hop distance × hit severity”.</p>
+      <p data-lang="zh">这套规则集里没有「规则」，只有一组参数。核心是一张<strong>贡献矩阵</strong>：按「资金方向 × 跳数距离 × 命中严重度」给出每一格的满分贡献值。</p>
+
+      <img class="shot" src="docs/images/03-scoring-matrix.png" alt="Scoring matrix" loading="lazy">
+      <p class="shot-cap" data-lang="en">Scoring ruleset configuration: severity weights · the contribution matrix (direction × hops × severity) · inflow direct hit of extreme severity contributes a full 80 points · outflow at 2 hops contributes only 10.</p>
+      <p class="shot-cap" data-lang="zh">评分规则集配置：严重度权重 · 贡献矩阵（方向 × 跳数 × 严重度）· 流入·直接命中极高风险，满贡献 80 分 · 流出·2 跳同样极高，只有 10 分。</p>
+
+      <ol class="nums">
+        <li data-lang="en"><b>Severity weights</b> — extreme ×1 · high ×0.8 · medium ×0.6 · low ×0.3</li>
+        <li data-lang="zh"><b>严重度权重</b> —— 极高 ×1、高 ×0.8、中 ×0.6、低 ×0.3</li>
+        <li data-lang="en"><b>Contribution matrix</b> — direction × hops × severity</li>
+        <li data-lang="zh"><b>贡献矩阵</b> —— 方向 × 跳数 × 严重度</li>
+        <li data-lang="en">Inflow · direct hit of extreme severity — full contribution <b>80</b></li>
+        <li data-lang="zh">流入·直接命中极高风险，满贡献 <b>80 分</b></li>
+        <li data-lang="en">Outflow · 2 hops, same severity — only <b>10</b></li>
+        <li data-lang="zh">流出·2 跳同样极高，只有 <b>10 分</b></li>
+        <li data-lang="en">Each cell = base × severity weight, i.e. the contribution at a 100% funds share</li>
+        <li data-lang="zh">每格 = 基数 × 严重度权重，即资金占比 100% 时的贡献</li>
+      </ol>
+
+      <h3 data-lang="en">Contribution matrix (built-in defaults)</h3>
+      <h3 data-lang="zh">贡献矩阵（内置默认值）</h3>
+      <table class="tbl">
+        <tr><th><span data-lang="en">Direction</span><span data-lang="zh">方向</span></th><th><span data-lang="en">Hops</span><span data-lang="zh">跳数</span></th><th><span data-lang="en">Extreme ×1</span><span data-lang="zh">极高 ×1</span></th><th><span data-lang="en">High ×0.8</span><span data-lang="zh">高 ×0.8</span></th><th><span data-lang="en">Medium ×0.6</span><span data-lang="zh">中 ×0.6</span></th><th><span data-lang="en">Low ×0.3</span><span data-lang="zh">低 ×0.3</span></th></tr>
+        <tr><td class="k"><span data-lang="en">Inflow</span><span data-lang="zh">流入</span></td><td><span data-lang="en">Direct (≤1 hop)</span><span data-lang="zh">直接（≤1 跳）</span></td><td class="num">80</td><td class="num">64</td><td class="num">48</td><td class="num">24</td></tr>
+        <tr><td class="k"><span data-lang="en">Inflow</span><span data-lang="zh">流入</span></td><td>2 hops</td><td class="num">50</td><td class="num">40</td><td class="num">30</td><td class="num">15</td></tr>
+        <tr><td class="k"><span data-lang="en">Inflow</span><span data-lang="zh">流入</span></td><td>3+ hops</td><td class="num">40</td><td class="num">32</td><td class="num">24</td><td class="num">12</td></tr>
+        <tr><td class="k"><span data-lang="en">Outflow</span><span data-lang="zh">流出</span></td><td><span data-lang="en">Direct (≤1 hop)</span><span data-lang="zh">直接（≤1 跳）</span></td><td class="num">80</td><td class="num">64</td><td class="num">48</td><td class="num">24</td></tr>
+        <tr><td class="k"><span data-lang="en">Outflow</span><span data-lang="zh">流出</span></td><td>2 hops</td><td class="num">10</td><td class="num">8</td><td class="num">6</td><td class="num">3</td></tr>
+        <tr><td class="k"><span data-lang="en">Outflow</span><span data-lang="zh">流出</span></td><td>3+ hops</td><td class="num">5</td><td class="num">4</td><td class="num">3</td><td class="num">1.5</td></tr>
+      </table>
+
+      <div class="note tip"><p><b data-lang="en">Why indirect outflow scores so low — </b><span data-lang="en">Money that <strong>flows in</strong> from an indirect source is still worth pursuing — sanctions money arriving from two or three hops away is real contamination of your address. But once money has <strong>flowed out</strong> and moved two or three hops, you have almost no control over it, and pursuing it is of limited value. So outflow at 2 hops is worth 10 points and 3+ hops only 5. The sole exception is <strong>direct outflow</strong>, which keeps 80 — sending money straight to a sanctions entity is a first-order terrorism-financing signal, as severe as receiving it.</span><b data-lang="zh">为什么流出的间接跳数分值这么低 —— </b><span data-lang="zh">钱<strong>流进来</strong>的间接来源仍然值得追究——两三跳外的制裁资金流入你的地址，这是实打实的污染。但钱<strong>流出去</strong>之后经过两三跳到了哪里，你几乎无法控制，追责意义有限。所以流出的 2 跳只有 10 分、3+ 跳只有 5 分。唯一例外是<strong>直接流出</strong>仍保留 80 分——直接把钱打给制裁实体是一级反恐融资信号，和直接收款一样严重。</span></p></div>
+
+      <h3 data-lang="en">How it is calculated</h3>
+      <h3 data-lang="zh">计算方式</h3>
+      <pre><span class="cm">单格得分 = 基数 × 严重度权重 × 资金占比
+Cell score = base × severity weight × funds share
+资金占比 = 去重后的风险金额 ÷ 地址链上总流入(或总流出)
+funds share = deduped risk amount ÷ address total on-chain inflow (or outflow)
+总分     = Σ 各格得分,封顶 100
+total    = Σ cell scores, capped at 100
+
+若命中「自身命中」型规则:
+If a "self-hit" rule fires:
+总分 = 自身命中分(100) × 严重度权重,忽略以上累加
+total = self-hit score (100) × severity weight, ignore the sum above</span></pre>
+      <p data-lang="en">Note the denominator is the address's <strong>total on-chain flow</strong>, not the flow inside the path-investigation graph. The path investigation only returns paths connected to a risk source — using it as the denominator would badly overstate an address with lots of normal activity.</p>
+      <p data-lang="zh">注意分母是地址在链上的<strong>总流量</strong>，不是路径调查图里的流量。路径调查只会返回与风险源连通的路径，如果拿它当分母，一个大量正常交易的地址会被严重高估。</p>
+
+      <h3 data-lang="en">Disposition tiers</h3>
+      <h3 data-lang="zh">判定档位</h3>
+      <table class="tbl">
+        <tr><th><span data-lang="en">Score range</span><span data-lang="zh">分数区间</span></th><th><span data-lang="en">Disposition</span><span data-lang="zh">判定</span></th><th><span data-lang="en">Meaning</span><span data-lang="zh">含义</span></th></tr>
+        <tr><td class="num">0 – 19</td><td class="k"><span data-lang="en">Pass</span><span data-lang="zh">通过 accept</span></td><td><span data-lang="en">No risk exposure found that needs action</span><span data-lang="zh">未发现需要处理的风险敞口</span></td></tr>
+        <tr><td class="num">20 – 49</td><td class="k"><span data-lang="en">Review</span><span data-lang="zh">复核 review</span></td><td><span data-lang="en">Risk linkage exists — manual review advised</span><span data-lang="zh">存在风险关联，建议人工复核</span></td></tr>
+        <tr><td class="num">50 – 79</td><td class="k"><span data-lang="en">EDD</span><span data-lang="zh">加强尽调 EDD</span></td><td><span data-lang="en">Significant risk — enhanced due diligence needed</span><span data-lang="zh">风险显著，需补充尽职调查</span></td></tr>
+        <tr><td class="num">80 – 100</td><td class="k"><span data-lang="en">Block</span><span data-lang="zh">拦截 block</span></td><td><span data-lang="en">Extreme risk — refuse the transaction</span><span data-lang="zh">风险极高，建议拒绝交易</span></td></tr>
+      </table>
+    </section>
+
+    <!-- 05 -->
+    <section id="s5">
+      <h2><span class="h-num">05</span><span data-lang="en">Using the console</span><span data-lang="zh">控制台使用方式</span></h2>
+      <p class="sec-sub" data-lang="en">From a blank input to an auditable snapshot — four steps.</p>
+      <p class="sec-sub" data-lang="zh">从空输入框到可审计的快照——四步走。</p>
+
+      <h3 data-lang="en">Step 1 · Run a screening</h3>
+      <h3 data-lang="zh">第一步 · 发起筛查</h3>
+      <p data-lang="en">Go to “Compliance › Screening”, paste an address or transaction hash. The system auto-detects the chain and screening type, and shows the two ruleset dropdowns.</p>
+      <p data-lang="zh">进入「合规 › 筛查」，粘贴地址或交易哈希。系统会自动识别链和筛查类型，并显示两个规则集下拉框。</p>
+
+      <img class="shot" src="docs/images/04-screening.png" alt="Screening page" loading="lazy">
+      <p class="shot-cap" data-lang="en">Screening page: input · auto-detected chain & type · path-matching ruleset picker (★ = default) · scoring ruleset picker · run button · advanced options · CEX-immune toggle (on by default, see §07).</p>
+      <p class="shot-cap" data-lang="zh">筛查页面：输入框 · 自动识别的链与筛查类型 · 路径匹配规则集选择器（★ 为默认）· 打分映射规则集选择器 · 运行按钮 · 高级选项 · 免疫交易所地址开关（默认开启，见第 07 节）。</p>
+
+      <ol class="nums">
+        <li data-lang="en">Address / transaction-hash input</li>
+        <li data-lang="zh">地址 / 交易哈希输入框</li>
+        <li data-lang="en">Auto-detected chain and screening type (<span class="mono" style="font-family:var(--mono)">Ethereum · KYA</span>)</li>
+        <li data-lang="zh">自动识别的链与筛查类型（<span class="mono" style="font-family:var(--mono)">Ethereum · KYA</span>）</li>
+        <li data-lang="en"><b>Path-matching ruleset</b> picker — ★ marks the default</li>
+        <li data-lang="zh"><b>路径匹配规则集</b>选择器，★ 为默认</li>
+        <li data-lang="en"><b>Scoring ruleset</b> picker</li>
+        <li data-lang="zh"><b>打分映射规则集</b>选择器</li>
+        <li data-lang="en">Run button — the detected type is shown in parentheses</li>
+        <li data-lang="zh">运行按钮，括号内是识别出的类型</li>
+        <li data-lang="en">Advanced options: time window, currency, hops, min amount, max nodes per hop</li>
+        <li data-lang="zh">高级选项：时间窗口、币种、跳数、最小金额、每跳最大节点数</li>
+        <li data-lang="en"><b>CEX-immune toggle</b> (on by default — read §07 first)</li>
+        <li data-lang="zh"><b>免疫交易所地址开关</b>（默认开启，见第 07 节）</li>
+      </ol>
+      <p data-lang="en">The two dropdowns are the subject of this manual: the left one picks “what counts as a violation”, the right one picks “how severe it is”.</p>
+      <p data-lang="zh">两个下拉框正是本手册的主题：左边选「什么算违规」，右边选「有多严重」。</p>
+
+      <h4 style="font-size:15px;font-weight:700;margin:18px 0 6px" data-lang="en">Advanced options</h4>
+      <h4 style="font-size:15px;font-weight:700;margin:18px 0 6px" data-lang="zh">高级选项说明</h4>
+      <table class="tbl">
+        <tr><th><span data-lang="en">Option</span><span data-lang="zh">选项</span></th><th><span data-lang="en">Default</span><span data-lang="zh">默认</span></th><th><span data-lang="en">Note</span><span data-lang="zh">说明</span></th></tr>
+        <tr><td class="k"><span data-lang="en">Time window</span><span data-lang="zh">时间窗口</span></td><td class="mono">ALL</td><td><span data-lang="en">Limits the analyzed tx range. <strong>Narrowing the window is significantly slower and returns fewer paths</strong> — keep ALL unless you really need otherwise.</span><span data-lang="zh">限定分析的交易时间范围。<strong>缩小窗口会显著变慢且返回更少路径</strong>，除非确有需要否则保持 ALL。</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Currency</span><span data-lang="zh">币种</span></td><td class="mono">USDT</td><td><span data-lang="en">USDT and USDC are supported today.</span><span data-lang="zh">目前支持 USDT 与 USDC。</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Inflow / outflow hops</span><span data-lang="zh">流入 / 流出跳数</span></td><td class="mono">3 / 1</td><td><span data-lang="en">Max hops per direction, 0–5. More hops = slower.</span><span data-lang="zh">各方向最多追几跳，范围 0–5。跳数越大越慢。</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Min amount</span><span data-lang="zh">最小金额</span></td><td class="mono">$10</td><td><span data-lang="en">Transfers below this are excluded — filters dust.</span><span data-lang="zh">低于此金额的转账不纳入分析，用于过滤粉尘交易。</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Max nodes per hop</span><span data-lang="zh">每跳最大节点数</span></td><td class="mono">200</td><td><span data-lang="en">How many counterparties each hop expands to, controlling graph size.</span><span data-lang="zh">每一跳最多展开多少个对手方，控制图规模。</span></td></tr>
+        <tr><td class="k"><span data-lang="en">Strict time ordering</span><span data-lang="zh">强制时序</span></td><td class="mono">ON</td><td><span data-lang="en">Each hop's time must be ≥ the previous hop — funds only flow forward in time. Fewer paths, but more trustworthy.</span><span data-lang="zh">要求路径上每一跳的时间不早于前一跳，即资金只能沿时间正向流动。开启后路径更少但更可信。</span></td></tr>
+        <tr><td class="k"><span data-lang="en">CEX-immune</span><span data-lang="zh">免疫交易所地址</span></td><td class="mono">ON</td><td><span data-lang="en">Exchange addresses are treated as clean and returned directly. <strong>Read §07 first.</strong></span><span data-lang="zh">把交易所地址视为干净并直接返回。<strong>请先阅读第 07 节。</strong></span></td></tr>
+      </table>
+
+      <h3 data-lang="en">Step 2 · Read the result summary</h3>
+      <h3 data-lang="zh">第二步 · 读懂结果摘要</h3>
+      <img class="shot" src="docs/images/05-result.png" alt="Screening result" loading="lazy">
+      <p class="shot-cap" data-lang="en">Result summary: final score & disposition · self-hit marker · the address's own labels · hit paths / deduped risk edges · address overview with inflow / outflow / balance / active range.</p>
+      <p class="shot-cap" data-lang="zh">筛查结果摘要：最终分数与判定 · 地址自身命中标记 · 地址自身携带的标签 · 命中路径数/去重后的风险边数 · 地址总览（总流入/总流出/余额/活跃区间）。</p>
+      <ol class="nums">
+        <li data-lang="en">Final score and disposition — produced by the scoring ruleset</li>
+        <li data-lang="zh">最终分数与判定，由打分映射规则集产出</li>
+        <li data-lang="en"><b>Address self-hit</b> marker — score goes straight to the top</li>
+        <li data-lang="zh"><b>地址自身命中</b>标记，分数直接拉满</li>
+        <li data-lang="en">The address's own labels</li>
+        <li data-lang="zh">地址自身携带的标签</li>
+        <li data-lang="en">Hit paths → deduped risk edges</li>
+        <li data-lang="zh">命中路径数 → 去重后的风险边数</li>
+        <li data-lang="en">Address overview: total inflow / outflow / balance / active range — below it, the risk-funds share of direct inflow, indirect inflow and outflow</li>
+        <li data-lang="zh">地址总览：总流入 / 总流出 / 余额 / 活跃区间，下方一行是直接入金、间接入金、流出各自的风险资金占比</li>
+      </ol>
+      <p data-lang="en">The three tabs on top: Summary / Graph / History. The Graph tab visualizes the fund flow; History shows past screenings of this address.</p>
+      <p data-lang="zh">顶部三个页签：摘要 / 图谱 / 历史。图谱页可视化资金流，历史页显示该地址过往筛查记录。</p>
+
+      <h3 data-lang="en">Step 3 · Verify where the score came from</h3>
+      <h3 data-lang="zh">第三步 · 核对分数来源</h3>
+      <img class="shot" src="docs/images/06-score.png" alt="Score calculation basis" loading="lazy">
+      <p class="shot-cap" data-lang="en">“Score calculation basis” and “triggered rules” break the final score open for you.</p>
+      <p class="shot-cap" data-lang="zh">「分数计算依据」和「触发规则」把最终分数拆开给你看。</p>
+      <ol class="nums">
+        <li data-lang="en">The calculation basis used this time (a self-hit in this example)</li>
+        <li data-lang="zh">本次采用的计算口径（此例为自身命中）</li>
+        <li data-lang="en">Cell derivation: <span class="mono" style="font-family:var(--mono)">$332.6K / $1.10M · 30% × 80 = 24.2</span></li>
+        <li data-lang="zh">单格推导：<span class="mono" style="font-family:var(--mono)">$332.6K / $1.10M · 30% × 80 = 24.2</span></li>
+        <li data-lang="en">The matrix cell it maps to — “inflow · direct · extreme”</li>
+        <li data-lang="zh">该格对应矩阵中的「流入 · 直接 · 极高」</li>
+        <li data-lang="en">Triggered rule list — expandable hit details</li>
+        <li data-lang="zh">触发规则列表，展开可看命中详情</li>
+        <li data-lang="en">Each rule's severity, action and hit-path count</li>
+        <li data-lang="zh">每条规则的严重度、处置动作与命中路径条数</li>
+      </ol>
+      <p data-lang="en">This example shows both calculation paths at once: the additive path gives the inflow-direct cell 24.2 points, but because a self-hit rule also fired, the final score takes “self-hit score × severity weight = 100 × 1” — straight to Block.</p>
+      <p data-lang="zh">这个例子同时展示了两条计算路径：累加口径算出流入直接格 24.2 分，但因为同时命中了自身命中规则，最终分数走「自身命中分 × 严重度权重 = 100 × 1」，直接判定为拦截。</p>
+
+      <h3 data-lang="en">Step 4 · Keep records</h3>
+      <h3 data-lang="zh">第四步 · 留档</h3>
+      <p data-lang="en">Every screening automatically generates a <strong>snapshot</strong> recording the request parameters and the complete result at that moment. “Compliance › Snapshots” lets you revisit any historical screening for audit purposes — snapshots cannot be tampered with.</p>
+      <p data-lang="zh">每次筛查都会自动生成一份<strong>快照</strong>，记录当时的请求参数与完整结果。在「合规 › 快照」可以回查历史筛查，用于审计留痕。快照详情不可篡改。</p>
+    </section>
+
+    <!-- 06 -->
+    <section id="s6">
+      <h2><span class="h-num">06</span><span data-lang="en">Using the API</span><span data-lang="zh">API 使用方式</span></h2>
+      <p class="sec-sub" data-lang="en">Everything the console can do, the API can do. The two rulesets are selected with two parameters.</p>
+      <p class="sec-sub" data-lang="zh">控制台能做的，API 都能做。两套规则集通过两个参数分别指定。</p>
+      <p data-lang="en">Create an API key under “Account › API Keys”; “Account › API Reference” lets you test every endpoint right in the page. Base URL: <code>https://api.trustin.bond</code>.</p>
+      <p data-lang="zh">在「账户 › API 密钥」创建密钥，「账户 › API 参考」可以直接在页面上调试所有接口。基础地址 <code>https://api.trustin.bond</code>。</p>
+
+      <h3 data-lang="en">Run a screening</h3>
+      <h3 data-lang="zh">发起筛查</h3>
+      <pre><span class="cm">// KYA:筛查地址 / KYA: screen an address</span>
+POST /api/v3/screen/kya?apikey=YOUR_KEY
+
+{
+  "chain_name": "Ethereum",
+  "address": "0x...",
+  "token": "usdt",
+  "inflow_hops": 3,
+  "outflow_hops": 1,
+  "ruleset_id": 0,          <span class="cm">// 路径匹配规则集,0 = 内置默认 / path-matching ruleset, 0 = built-in default</span>
+  "scoring_ruleset_id": 0,  <span class="cm">// 打分映射规则集,0 = 内置默认 / scoring ruleset, 0 = built-in default</span>
+  "cex_immune": true,
+  "mode": "async"           <span class="cm">// sync 直接返回结果,async 返回 job_id / sync returns inline, async returns a job_id</span>
+}</pre>
+      <p data-lang="en">KYT uses <code>/api/v3/screen/kyt</code> with <code>tx_id</code>, and you can set <code>screen_direction</code> to <code>in</code> / <code>out</code> / <code>both</code>, plus separate <code>in_ruleset_id</code> and <code>out_ruleset_id</code>.</p>
+      <p data-lang="zh">KYT 用 <code>/api/v3/screen/kyt</code>，传 <code>tx_id</code>，并可用 <code>screen_direction</code> 指定 <code>in</code> / <code>out</code> / <code>both</code>，以及分别指定 <code>in_ruleset_id</code> 与 <code>out_ruleset_id</code>。</p>
+
+      <h3 data-lang="en">Fetch results asynchronously</h3>
+      <h3 data-lang="zh">异步取结果</h3>
+      <pre>GET /api/v3/screen/result/{job_id}?type=kya&amp;apikey=YOUR_KEY
+
+<span class="cm">// status: PENDING | PROCESSING | COMPLETE
+// COMPLETE 时 result 字段带完整结果 / when COMPLETE, the result field carries the full result</span></pre>
+      <p data-lang="en">After submitting an async job the system starts computing immediately — polling only reads status, it never triggers computation. Most integrations should use <code>async</code>: sync mode can take a long time on deep hops or highly active addresses.</p>
+      <p data-lang="zh">提交异步任务后系统会立即开始计算，轮询只是读取状态，不会触发计算。绝大多数集成建议使用 <code>async</code>：同步模式在深跳数、高活跃地址上可能耗时较久。</p>
+    </section>
+
+    <!-- 07 -->
+    <section id="s7">
+      <h2><span class="h-num">07</span><span data-lang="en">Notes &amp; gotchas</span><span data-lang="zh">使用注意事项</span></h2>
+
+      <div class="note warn">
+        <p><b data-lang="en">⚠️ IMPORTANT · Exchange-address immunity (behavior varies by version)</b><b data-lang="zh">⚠️ 重要 · 交易所地址免疫（行为随版本变化）</b></p>
+        <p data-lang="en">“CEX-immune” is <strong>on by default</strong>. While enabled, if the screened address carries an exchange (CEX) label, the system returns a clean result (0 / Pass) directly — <strong>no rule matching runs at all</strong>.</p>
+        <p data-lang="zh">「免疫交易所地址」<strong>默认开启</strong>。开启时，若被筛地址带有交易所（CEX）标签，系统会直接返回干净结果（0 分 / 通过），<strong>不再执行任何规则匹配</strong>。</p>
+        <p data-lang="en">As of the production version of 2026-08-17, any address with a CEX label is immune <strong>even if it also carries a sanctions label</strong> — such addresses are judged “Pass” under default settings. For strong-compliance scenarios such as sanctions screening, explicitly <strong>disable</strong> the toggle.</p>
+        <p data-lang="zh"><strong>截至 2026-08-17 的生产版本</strong>，只要地址带 CEX 标签就会被免疫，<strong>即使它同时带有制裁标签</strong>——这类地址在默认设置下会被判为「通过」。对制裁筛查等强合规场景，请显式<strong>关闭</strong>该开关。</p>
+        <p data-lang="en">A later version will tighten immunity to “pure CEX”: when the address also carries any of Sanctions, Terrorism Financing, Public Freezing Action, Illicit Markets, Other Financial Crimes, Cybercrime, Obfuscation, Gambling, High-Risk Entities, it will no longer be immune and will run the full screening. After the upgrade you won't need to disable the toggle manually — go by the actual version in your environment.</p>
+        <p data-lang="zh">后续版本会把免疫范围收紧为「纯 CEX」：当地址同时带有 Sanctions、Terrorism Financing、Public Freezing Action、Illicit Markets、Other Financial Crimes、Cybercrime、Obfuscation、Gambling、High-Risk Entities 之中任一类别时，不再免疫，而是正常走完整筛查。升级后可以不必再手动关闭开关——请以你所用环境的实际版本为准。</p>
+      </div>
+
+      <ul>
+        <li data-lang="en"><b>Denominator</b> — “funds share” in results is risk amount ÷ the address's total on-chain flow; the per-path “risk-funds share (<code>risk_rate</code>)” is a different concept used for layered-exposure thresholds. Don't mix them up.</li>
+        <li data-lang="zh"><b>分母口径</b> —— 结果里的「资金占比」是风险金额占地址链上总流量的比例；而单条路径上的「风险资金占比（<code>risk_rate</code>）」是另一个概念，用于分层暴露规则的门槛判断。两者不要混用。</li>
+        <li data-lang="en"><b>Hops vs latency</b> — the graph grows exponentially with each hop. For daily screening, inflow 3 hops / outflow 1 hop is recommended.</li>
+        <li data-lang="zh"><b>跳数与耗时</b> —— 跳数每增加一跳，图规模成倍增长。日常筛查建议流入 3 跳、流出 1 跳。</li>
+        <li data-lang="en"><b>Time window</b> — narrowing the window is slower (edge-by-edge filtering, not index-based) and returns fewer paths. Keep ALL unless you have a specific need.</li>
+        <li data-lang="zh"><b>时间窗口</b> —— 缩小时间窗口反而更慢（逐边过滤而非索引过滤），且返回路径更少。没有明确需求就保持 ALL。</li>
+        <li data-lang="en"><b>Custom rulesets</b> — built-in rulesets are read-only. To adjust rules or the matrix, copy one first, then edit the copy.</li>
+        <li data-lang="zh"><b>自定义规则集</b> —— 内置规则集只读。要调整规则或矩阵，先复制一份，再在副本上修改。</li>
+        <li data-lang="en"><b>Quota</b> — every screening consumes quota; the top bar shows remaining quota and expiry.</li>
+        <li data-lang="zh"><b>额度</b> —— 每次筛查消耗额度，顶部横条显示剩余额度与有效期。</li>
+      </ul>
+
+      <p class="footnote" data-lang="en">Compiled from production configuration: path-matching rulesets v1.3 (built-in IDs 22 / 23 / 24), scoring ruleset v1.0 (built-in ID 51). Screenshots from the AML console v2.</p>
+      <p class="footnote" data-lang="zh">本手册内容依据生产环境实际配置整理：路径匹配规则集 v1.3（内置 ID 22 / 23 / 24），打分映射规则集 v1.0（内置 ID 51）。截图取自 AML 控制台 v2。</p>
+    </section>
+
+    <div class="foot">
+      <span>© 2026 DART · <span data-lang="en">Product Manual</span><span data-lang="zh">产品使用手册</span></span>
+      <span><a href="index.html" data-lang="en">← Back to DART home</a><a href="index.html" data-lang="zh">← 返回 DART 首页</a> · <a href="https://width.info/api-reference" target="_blank" rel="noopener" data-lang="en">API Reference</a><a href="https://width.info/api-reference" target="_blank" rel="noopener" data-lang="zh">API 参考</a> · <a href="https://github.com/amlclaw/amlclaw.com" target="_blank" rel="noopener">AMLClaw</a></span>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// bilingual toggle (works on any element via the hidden attribute)
+function setLang(l){
+  document.documentElement.lang = (l === 'zh') ? 'zh-CN' : 'en';
+  document.querySelectorAll('[data-lang]:not(.lang-btn)').forEach(function(el){
+    el.hidden = el.getAttribute('data-lang') !== l;
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === l);
+  });
+  try{ localStorage.setItem('daia-lang', l); }catch(e){}
+}
+(function init(){
+  var l = null;
+  try{ l = localStorage.getItem('daia-lang'); }catch(e){}
+  if(!l){
+    var nav = (navigator.language || '').toLowerCase();
+    l = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  setLang(l);
+})();
+
+// active TOC highlight
+(function(){
+  var links = [].slice.call(document.querySelectorAll('#toc a'));
+  var map = {}; links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){ l.classList.remove('active'); });
+        if(map[e.target.id]) map[e.target.id].classList.add('active');
+      }
+    });
+  },{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('section[id]').forEach(function(s){ obs.observe(s); });
+})();
+</script>
+</body>
+</html>
