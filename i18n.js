@@ -18,7 +18,7 @@ const I18N = {
     "graph.caption": "One address, one fund-flow graph: who each counterparty is, which chain is risky, and how many points it costs — every hop explainable.",
 
     "stats.chains": "chains, near real-time data",
-    "stats.millionsNum": "Millions",
+    "stats.millionsNum": "200 million",
     "stats.labels": "of labeled addresses",
     "stats.sanctions": "sanctions data search",
     "stats.tracing": "fund tracing depth",
@@ -114,7 +114,7 @@ const I18N = {
     "graph.caption": "一个地址，一张资金链路图：每一跳对手方是谁、哪条链路有风险、该扣多少分——每一步都可解释。",
 
     "stats.chains": "条链 · 近实时数据",
-    "stats.millionsNum": "百万级",
+    "stats.millionsNum": "2亿",
     "stats.labels": "标签地址库",
     "stats.sanctions": "制裁数据检索",
     "stats.tracing": "最深资金追溯",
